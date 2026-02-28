@@ -77,7 +77,10 @@ const method=document.getElementById("method").value;
 const qrDiv=document.getElementById("qrcode");
 qrDiv.innerHTML="";
 
-if(!method) return;
+if(!method){
+document.getElementById("paytext").innerText="";
+return;
+}
 
 let qrData={};
 
