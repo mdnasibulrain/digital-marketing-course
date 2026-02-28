@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Digital Marketing Course</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
 body{font-family:Arial;background:#eef2f7;text-align:center;padding:40px}
 .card{background:white;padding:25px;border-radius:15px;max-width:420px;margin:auto;box-shadow:0 5px 25px rgba(0,0,0,.1)}
@@ -16,6 +17,7 @@ input{padding:10px;width:85%;margin-top:10px;border-radius:6px;border:1px solid 
 .link a{display:block;background:green;color:white;padding:10px;margin:10px;border-radius:8px;text-decoration:none}
 </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -26,6 +28,7 @@ input{padding:10px;width:85%;margin-top:10px;border-radius:6px;border:1px solid 
 
 <div id="step1" class="box">
 <h3>Select Payment Method</h3>
+
 <select id="method" onchange="generateQR()">
 <option value="">Select Payment</option>
 <option value="Khalti">Khalti</option>
@@ -62,77 +65,96 @@ input{padding:10px;width:85%;margin-top:10px;border-radius:6px;border:1px solid 
 </div>
 
 <script>
+const BASE = "https://digital-marketing-course.onrender.com";
 const FULL_AMOUNT = 299;
 
 function start(){
-    document.getElementById("step1").style.display="block";
+document.getElementById("step1").style.display="block";
 }
 
 function generateQR(){
-    const method = document.getElementById("method").value;
-    const qrDiv = document.getElementById("qrcode");
-    qrDiv.innerHTML = "";
-    if(method === "") return;
+const method=document.getElementById("method").value;
+const qrDiv=document.getElementById("qrcode");
+qrDiv.innerHTML="";
 
-    let qrData = {};
-    if(method === "Khalti"){
-        qrData = {"Khalti_ID": "9807648317", "name": "Ishul Kawari", "amount": FULL_AMOUNT};
-    } else if(method === "eSewa"){
-        qrData = {"eSewa_id":"9807648317","name":"Ishul Kawari","amount":FULL_AMOUNT};
-    } else if(method === "Bank"){
-        qrData = {
-            "accountNumber":"0315759479191001",
-            "accountName":"ISHUL KAWARI",
-            "bankCode":"BOALNPKA",
-            "accountType":"Sarbashrestha Sahaj Bachat Khata Online",
-            "bankCodeCIPS":"2301",
-            "amount":FULL_AMOUNT
-        };
-    }
+if(!method) return;
 
-    new QRCode(qrDiv, { text: JSON.stringify(qrData), width:200, height:200 });
-    document.getElementById("paytext").innerText = method==='Bank' ? 
-        'Bank Transfer: scan QR or use account info' : method+' QR generated. Scan with app to pay NPR '+FULL_AMOUNT;
+let qrData={};
+
+if(method==="Khalti"){
+qrData={"Khalti_ID":"9807648317","name":"Ishul Kawari","amount":FULL_AMOUNT};
+}
+else if(method==="eSewa"){
+qrData={"eSewa_id":"9807648317","name":"Ishul Kawari","amount":FULL_AMOUNT};
+}
+else{
+qrData={
+"accountNumber":"0315759479191001",
+"accountName":"ISHUL KAWARI",
+"bankCode":"BOALNPKA",
+"bankCodeCIPS":"2301",
+"amount":FULL_AMOUNT
+};
+}
+
+new QRCode(qrDiv,{text:JSON.stringify(qrData),width:200,height:200});
+
+document.getElementById("paytext").innerText =
+method==="Bank"
+? "Scan QR or transfer NPR 299"
+: method+" QR ready. Pay NPR "+FULL_AMOUNT;
 }
 
 async function submitPayment(){
-    const email = document.getElementById("email").value;
-    const txn = document.getElementById("txn").value;
-    const paidAmount = parseInt(document.getElementById("paid").value);
 
-    if(!email || !txn || isNaN(paidAmount)){
-        alert("Fill all fields");
-        return;
-    }
+const email=document.getElementById("email").value;
+const txn=document.getElementById("txn").value;
+const paidAmount=parseInt(document.getElementById("paid").value);
 
-    if(paidAmount < FULL_AMOUNT){
-        alert(`Payment must be NPR ${FULL_AMOUNT}. You entered NPR ${paidAmount}`);
-        return;
-    }
+if(!email||!txn||isNaN(paidAmount))
+return alert("Fill all fields");
 
-    try {
-        const res = await fetch('http://localhost:3000/submit-payment', {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({email, txn, paidAmount, method: document.getElementById("method").value})
-        });
-        const data = await res.json();
-        if(res.ok){
-            alert(data.message);
-            document.getElementById("wait").style.display="block";
-        } else alert(data.message);
-    } catch(e){alert("Error connecting to server");}
+if(paidAmount!==FULL_AMOUNT)
+return alert("Exact payment must be NPR "+FULL_AMOUNT);
+
+try{
+
+const res=await fetch(BASE+"/submit-payment",{
+method:"POST",
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+email,
+txn,
+paidAmount,
+method:document.getElementById("method").value
+})
+});
+
+const data=await res.json();
+
+if(res.ok){
+alert(data.message);
+document.getElementById("wait").style.display="block";
+}
+else alert(data.message);
+
+}catch{
+alert("Server connection error");
+}
 }
 
-// Poll verification every 5 sec
 setInterval(async ()=>{
-    const txn = document.getElementById("txn").value;
-    if(!txn) return;
-    try{
-        const res = await fetch(`http://localhost:3000/check/${txn}`);
-        const data = await res.json();
-        if(data.verified) document.getElementById("download").style.display="block";
-    }catch(e){}
+const txn=document.getElementById("txn").value;
+if(!txn) return;
+
+try{
+const res=await fetch(BASE+"/check/"+txn);
+const data=await res.json();
+
+if(data.verified)
+document.getElementById("download").style.display="block";
+
+}catch{}
 },5000);
 </script>
 
