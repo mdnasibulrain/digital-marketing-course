@@ -157,6 +157,50 @@ document.getElementById("download").style.display="block";
 }catch{}
 },5000);
 </script>
+  
+<script>
+/* STORE LAST TXN WITHOUT MODIFYING ORIGINAL FUNCTION */
+let LAST_TXN = "";
 
+// Hook into button click instead of editing submitPayment()
+document.querySelector("button[onclick='submitPayment()']")
+.addEventListener("click",()=>{
+    LAST_TXN = document.getElementById("txn").value.trim();
+});
+
+
+/* CHECK VERIFICATION USING STORED TXN */
+setInterval(async ()=>{
+    if(!LAST_TXN) return;
+
+    try{
+        const res = await fetch(BASE+"/check/"+LAST_TXN);
+        const data = await res.json();
+
+        if(data.verified){
+
+            // show download
+            document.getElementById("download").style.display="block";
+
+            // hide waiting box
+            document.getElementById("wait").style.display="none";
+
+            // reset form fields
+            document.getElementById("email").value="";
+            document.getElementById("txn").value="";
+            document.getElementById("paid").value="";
+            document.getElementById("method").value="";
+
+            // remove QR
+            document.getElementById("qrcode").innerHTML="";
+            document.getElementById("paytext").innerText="";
+
+            // stop checking
+            LAST_TXN="";
+        }
+
+    }catch(e){}
+},3000);
+              </script>
 </body>
 </html>
