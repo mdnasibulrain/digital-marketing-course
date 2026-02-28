@@ -35,45 +35,53 @@ button:hover{background:#1e40af}
 <script>
 const BASE="https://digital-marketing-course.onrender.com";
 
+// Load transactions from backend API
 async function loadTransactions(){
+    try {
+        const res = await fetch(BASE + "/transactions"); // <-- updated endpoint
+        const data = await res.json();
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML = '';
 
-const res=await fetch(BASE+"/transactions.json");
-const data=await res.json();
-
-const tbody=document.getElementById("tbody");
-tbody.innerHTML="";
-
-data.forEach(tx=>{
-const tr=document.createElement("tr");
-
-tr.innerHTML=`
-<td>${tx.email}</td>
-<td>${tx.txn}</td>
-<td>${tx.paidAmount}</td>
-<td>${tx.method}</td>
-<td>${tx.status}</td>
-<td>
-${tx.status==="pending"
-? `<button onclick="verify('${tx.txn}')">Verify</button>`
-: "✔"}
-</td>
-`;
-
-tbody.appendChild(tr);
-});
+        data.forEach(tx => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+            <td>${tx.email}</td>
+            <td>${tx.txn}</td>
+            <td>${tx.paidAmount}</td>
+            <td>${tx.method}</td>
+            <td>${tx.status}</td>
+            <td>
+                ${tx.status === "pending" ? `<button onclick="verify('${tx.txn}')">Verify</button>` : "✔"}
+            </td>`;
+            tbody.appendChild(tr);
+        });
+    } catch (e) {
+        console.error("Failed to load transactions:", e);
+    }
 }
 
+// Verify payment (admin only)
 async function verify(txn){
-
-await fetch(BASE+"/verify-payment",{
-method:"POST",
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({txn})
-});
-
-loadTransactions();
+    try {
+        const res = await fetch(BASE + "/verify-payment", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({txn})
+        });
+        if(res.ok){
+            loadTransactions(); // refresh table
+        } else {
+            const data = await res.json();
+            alert(data.message || "Failed to verify");
+        }
+    } catch(e){
+        alert("Error connecting to server");
+        console.error(e);
+    }
 }
 
+// Load table on page load
 loadTransactions();
 </script>
 
