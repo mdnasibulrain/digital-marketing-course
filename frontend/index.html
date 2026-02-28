@@ -73,11 +73,6 @@ document.getElementById("step1").style.display="block";
 }
 
 function generateQR(){
-  if(!method){
-qrDiv.innerHTML="";
-document.getElementById("paytext").innerText="";
-return;
-  }
 const method=document.getElementById("method").value;
 const qrDiv=document.getElementById("qrcode");
 qrDiv.innerHTML="";
