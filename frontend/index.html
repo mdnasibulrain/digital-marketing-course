@@ -158,5 +158,42 @@ document.getElementById("download").style.display="block";
 },5000);
 </script>
 
+  <script>
+// ======= Extra enhancements =======
+
+// Reset form fields & QR after submit
+const originalSubmitPayment = submitPayment; // backup original function
+
+submitPayment = async function() {
+    await originalSubmitPayment(); // call original
+
+    // reset fields and payment selection
+    document.getElementById("method").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("txn").value = "";
+    document.getElementById("paid").value = "";
+    document.getElementById("qrcode").innerHTML = "";
+    document.getElementById("paytext").innerText = "";
+}
+
+// Hide "Waiting Verification..." after admin verified
+const waitDiv = document.getElementById("wait");
+const downloadDiv = document.getElementById("download");
+
+// Poll verification already exists, just extend it
+setInterval(async ()=>{
+    const txn = document.getElementById("txn").value.trim();
+    if(!txn) return;
+    try{
+        const res = await fetch(BASE+"/check/"+txn);
+        const data = await res.json();
+        if(data.verified){
+            downloadDiv.style.display = "block";
+            waitDiv.style.display = "none"; // hide waiting message automatically
+        }
+    }catch(e){}
+},5000);
+  </script>
+
 </body>
 </html>
