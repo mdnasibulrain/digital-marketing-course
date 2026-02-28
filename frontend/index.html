@@ -133,8 +133,18 @@ method:document.getElementById("method").value
 const data=await res.json();
 
 if(res.ok){
-alert(data.message);
-document.getElementById("wait").style.display="block";
+    alert(data.message);
+    document.getElementById("wait").style.display="block";
+
+    // RESET FIELDS
+    document.getElementById("method").value = ""; // reset dropdown
+    document.getElementById("email").value = "";
+    document.getElementById("txn").value = "";
+    document.getElementById("paid").value = "";
+
+    // Also clear QR code & payment text
+    document.getElementById("qrcode").innerHTML = "";
+    document.getElementById("paytext").innerText = "";
 }
 else alert(data.message);
 
