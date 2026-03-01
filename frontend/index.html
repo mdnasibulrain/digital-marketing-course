@@ -27,7 +27,158 @@ display:flex;
 align-items:center;
 justify-content:center;
 }
+.hero{
+text-align:center;
+padding:80px 20px;
+background:#000;
+color:white;
+}
 
+.hero h1{
+font-size:42px;
+color:#facc15;
+}
+
+.hero p{
+margin:15px 0;
+color:#ddd;
+font-size:18px;
+}
+
+.badges span{
+display:inline-block;
+margin:8px;
+background:#111;
+padding:8px 14px;
+border-radius:8px;
+border:1px solid #333;
+}
+
+.cta{
+margin-top:20px;
+padding:16px 35px;
+font-size:18px;
+background:#facc15;
+color:black;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+box-shadow:0 0 20px #facc15;
+}
+
+.countdown{
+margin-top:20px;
+font-size:20px;
+color:#facc15;
+font-weight:bold;
+}
+
+.stock{
+margin-top:10px;
+color:#f87171;
+font-weight:bold;
+}
+
+.trust{
+display:flex;
+justify-content:center;
+gap:30px;
+padding:25px;
+background:#111;
+color:#fff;
+flex-wrap:wrap;
+}
+
+.features{
+padding:70px 20px;
+text-align:center;
+background:#020617;
+color:white;
+}
+
+.features h2{
+color:#facc15;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
+
+.boxf{
+background:#111;
+padding:25px;
+border-radius:14px;
+border:1px solid #222;
+transition:.3s;
+}
+
+.boxf:hover{
+transform:translateY(-6px);
+border-color:#facc15;
+}
+
+.testimonials{
+padding:70px 20px;
+text-align:center;
+background:black;
+color:white;
+}
+
+.slider{
+max-width:600px;
+margin:auto;
+overflow:hidden;
+}
+
+.slide{
+padding:20px;
+font-size:20px;
+display:none;
+}
+
+.guarantee{
+padding:70px 20px;
+text-align:center;
+background:#020617;
+color:white;
+}
+
+.guarantee h2{
+color:#facc15;
+}
+
+.scarcity{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#facc15;
+color:black;
+text-align:center;
+padding:12px;
+font-weight:bold;
+z-index:999;
+}
+
+.popup{
+position:fixed;
+bottom:70px;
+left:20px;
+background:#111;
+color:white;
+padding:15px 20px;
+border-radius:10px;
+display:none;
+border:1px solid #333;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+  
 .wrapper{
 width:100%;
 padding:20px;
@@ -177,6 +328,33 @@ box-shadow:0 0 20px #2563eb;
 
 <div class="wrapper">
 
+  <!-- HERO SECTION -->
+<section class="hero">
+<h1>Master Digital Marketing in 7 Days</h1>
+<p>Learn SEO • Ads • Affiliate • Sales Funnels • Automation</p>
+
+<div class="badges">
+<span>✔ Lifetime Access</span>
+<span>✔ Instant Download</span>
+<span>✔ Beginner Friendly</span>
+</div>
+
+<div class="countdown" id="countdown"></div>
+
+<button onclick="start()" class="cta">Get Instant Access — NPR 299</button>
+
+<div class="stock" id="stock"></div>
+</section>
+
+
+<!-- TRUST BAR -->
+<section class="trust">
+<div>⭐ 4.9 Rating</div>
+<div>👨‍🎓 4,000+ Students</div>
+<div>🌍 Worldwide Access</div>
+<div>🔒 Secure Payment</div>
+</section>
+
 <div class="card">
 
 <h1 class="title">Digital Marketing Course</h1>
@@ -226,7 +404,55 @@ box-shadow:0 0 20px #2563eb;
 </div>
 
 </div>
+<!-- FEATURES -->
+<section class="features">
 
+<h2>What You'll Learn</h2>
+
+<div class="grid">
+
+<div class="boxf">📈 Facebook Ads Mastery</div>
+<div class="boxf">🎯 Sales Funnel Blueprint</div>
+<div class="boxf">🤖 Automation Systems</div>
+<div class="boxf">💰 Passive Income Strategy</div>
+<div class="boxf">🔎 SEO Ranking Secrets</div>
+<div class="boxf">📊 Analytics Tracking</div>
+
+</div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+
+<h2>Student Results</h2>
+
+<div class="slider" id="slider">
+
+<div class="slide">“I earned my first $500 online in 10 days.” — Rahul</div>
+<div class="slide">“Best course ever. Clear and practical.” — Sita</div>
+<div class="slide">“I finally understand ads properly.” — Arjun</div>
+
+</div>
+</section>
+
+
+<!-- GUARANTEE -->
+<section class="guarantee">
+<h2>30-Day Money Back Guarantee</h2>
+<p>If you don't like the course, we refund instantly.</p>
+</section>
+
+
+<!-- SCARCITY BAR -->
+<div class="scarcity">
+⚡ 73% Seats Already Claimed
+</div>
+
+
+<!-- LIVE SALES POPUP -->
+<div class="popup" id="popup"></div>
+  
 </div>
 </div>
 
@@ -378,5 +604,53 @@ setInterval(async ()=>{
     }catch(e){}
 },3000);
               </script>
+  <script>
+
+// COUNTDOWN TIMER
+let time = 600;
+setInterval(()=>{
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("countdown").innerText =
+"Offer expires in "+m+":"+ (s<10?"0"+s:s);
+if(time>0) time--;
+},1000);
+
+
+// STOCK COUNTER
+let stock = 17;
+setInterval(()=>{
+stock--;
+if(stock<3) stock=17;
+document.getElementById("stock").innerText =
+"Only "+stock+" seats left";
+},8000);
+
+
+// TESTIMONIAL SLIDER
+let i=0;
+setInterval(()=>{
+let slides=document.querySelectorAll(".slide");
+slides.forEach(s=>s.style.display="none");
+slides[i].style.display="block";
+i=(i+1)%slides.length;
+},3000);
+
+
+// FAKE SALES POPUP
+const names=["Ramesh","Aman","Sita","Raj","Anita","Rahul","Kiran"];
+
+setInterval(()=>{
+let name=names[Math.floor(Math.random()*names.length)];
+let popup=document.getElementById("popup");
+popup.innerText=name+" just purchased";
+popup.style.display="block";
+
+setTimeout(()=>popup.style.display="none",3000);
+
+},7000);
+
+  </script>
+  
 </body>
 </html>
