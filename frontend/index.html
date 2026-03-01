@@ -6,42 +6,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-background:
-radial-gradient(circle at 20% 20%, #1e3a8a, transparent),
-radial-gradient(circle at 80% 80%, #2563eb, transparent),
-#020617;
-color:white;
+background:#000;
+color:#fff;
 min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
 }
+
+/* HERO */
 .hero{
 text-align:center;
-padding:80px 20px;
-background:#000;
-color:white;
+padding:90px 20px 60px;
 }
 
 .hero h1{
 font-size:42px;
 color:#facc15;
+font-weight:700;
 }
 
 .hero p{
 margin:15px 0;
-color:#ddd;
+color:#fff;
+opacity:.8;
 font-size:18px;
 }
 
@@ -49,52 +39,198 @@ font-size:18px;
 display:inline-block;
 margin:8px;
 background:#111;
-padding:8px 14px;
-border-radius:8px;
-border:1px solid #333;
+padding:9px 16px;
+border-radius:10px;
+border:1px solid #facc15;
+font-size:14px;
 }
 
 .cta{
-margin-top:20px;
-padding:16px 35px;
-font-size:18px;
+margin-top:25px;
+padding:16px 38px;
+font-size:19px;
 background:#facc15;
-color:black;
+color:#000;
 border:none;
-border-radius:10px;
+border-radius:12px;
 cursor:pointer;
-font-weight:bold;
-box-shadow:0 0 20px #facc15;
+font-weight:700;
+box-shadow:0 0 25px #facc15;
+transition:.3s;
 }
 
+.cta:hover{transform:scale(1.05)}
+
 .countdown{
-margin-top:20px;
+margin-top:25px;
 font-size:20px;
 color:#facc15;
-font-weight:bold;
+font-weight:700;
 }
 
 .stock{
 margin-top:10px;
-color:#f87171;
-font-weight:bold;
+color:#facc15;
+font-weight:600;
 }
 
+/* TRUST BAR */
 .trust{
 display:flex;
 justify-content:center;
 gap:30px;
 padding:25px;
+flex-wrap:wrap;
+border-top:1px solid #222;
+border-bottom:1px solid #222;
+}
+
+.trust div{
 background:#111;
+padding:12px 18px;
+border-radius:10px;
+border:1px solid #facc15;
+font-size:14px;
+}
+
+/* CARD */
+.wrapper{padding:40px 20px;}
+
+.card{
+background:#0a0a0a;
+border:1px solid #facc15;
+border-radius:25px;
+padding:40px 30px;
+max-width:430px;
+margin:40px auto;
+text-align:center;
+box-shadow:0 0 40px rgba(250,204,21,.25);
+}
+
+.title{
+font-size:26px;
+font-weight:700;
+margin-bottom:10px;
 color:#fff;
+}
+
+.price{
+font-size:40px;
+font-weight:700;
+color:#facc15;
+margin-bottom:25px;
+}
+
+button{
+border:none;
+padding:15px 28px;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.buybtn{
+background:#facc15;
+color:#000;
+box-shadow:0 0 20px #facc15;
+}
+
+.buybtn:hover{transform:translateY(-3px)}
+
+.submitbtn{
+background:#fff;
+color:#000;
+margin-top:15px;
+font-weight:700;
+}
+
+.submitbtn:hover{transform:scale(1.05)}
+
+.box{display:none;margin-top:25px}
+
+.label{
+display:block;
+margin-bottom:10px;
+font-size:14px;
+opacity:.8;
+}
+
+select,input{
+width:100%;
+padding:13px;
+margin-top:12px;
+border-radius:12px;
+border:1px solid #facc15;
+background:#000;
+color:#fff;
+outline:none;
+}
+
+select:focus,input:focus{
+box-shadow:0 0 12px #facc15;
+}
+
+#qrcode{margin-top:20px}
+
+.paytext{
+margin-top:12px;
+color:#facc15;
+font-size:14px;
+}
+
+.waitbox{
+background:#111;
+border:1px solid #facc15;
+color:#facc15;
+padding:16px;
+border-radius:14px;
+}
+
+.successbox{
+background:#111;
+border:1px solid #facc15;
+padding:20px;
+border-radius:15px;
+}
+
+.link a{
+display:block;
+margin-top:14px;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+color:#000;
+font-weight:700;
+background:#facc15;
+transition:.3s;
+}
+
+.link a:hover{
+transform:scale(1.05);
+box-shadow:0 0 18px #facc15;
+}
+
+/* PAYMENT ICONS */
+.payicons{
+margin-top:15px;
+display:flex;
+justify-content:center;
+gap:18px;
 flex-wrap:wrap;
 }
 
+.payicons img{
+width:55px;
+background:#fff;
+padding:6px;
+border-radius:10px;
+}
+
+/* FEATURES */
 .features{
-padding:70px 20px;
+padding:80px 20px;
 text-align:center;
-background:#020617;
-color:white;
 }
 
 .features h2{
@@ -112,245 +248,89 @@ margin:auto;
 
 .boxf{
 background:#111;
-padding:25px;
-border-radius:14px;
-border:1px solid #222;
+padding:26px;
+border-radius:16px;
+border:1px solid #facc15;
 transition:.3s;
 }
 
-.boxf:hover{
-transform:translateY(-6px);
-border-color:#facc15;
-}
+.boxf:hover{transform:translateY(-6px)}
 
+/* TESTIMONIAL */
 .testimonials{
-padding:70px 20px;
+padding:80px 20px;
 text-align:center;
-background:black;
-color:white;
 }
 
-.slider{
-max-width:600px;
-margin:auto;
-overflow:hidden;
-}
+.slide{padding:20px;font-size:20px;display:none}
 
-.slide{
-padding:20px;
-font-size:20px;
-display:none;
-}
-
+/* GUARANTEE */
 .guarantee{
-padding:70px 20px;
+padding:80px 20px;
 text-align:center;
-background:#020617;
-color:white;
+border-top:1px solid #222;
 }
 
-.guarantee h2{
-color:#facc15;
-}
+.guarantee h2{color:#facc15}
 
+/* SCARCITY */
 .scarcity{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
 background:#facc15;
-color:black;
+color:#000;
 text-align:center;
-padding:12px;
-font-weight:bold;
+padding:13px;
+font-weight:700;
 z-index:999;
 }
 
+/* POPUP */
 .popup{
 position:fixed;
-bottom:70px;
+bottom:80px;
 left:20px;
 background:#111;
-color:white;
-padding:15px 20px;
-border-radius:10px;
-display:none;
-border:1px solid #333;
-box-shadow:0 0 20px rgba(0,0,0,.5);
-}
-  
-.wrapper{
-width:100%;
-padding:20px;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(18px);
-border-radius:25px;
-padding:35px;
-max-width:420px;
-margin:auto;
-text-align:center;
-box-shadow:
-0 0 40px rgba(37,99,235,.3),
-0 0 80px rgba(37,99,235,.2);
-animation:fade 0.7s ease;
-}
-
-@keyframes fade{
-from{opacity:0; transform:translateY(20px)}
-to{opacity:1; transform:translateY(0)}
-}
-
-.title{
-font-size:26px;
-font-weight:700;
-margin-bottom:10px;
-color:#60a5fa;
-}
-
-.price{
-font-size:34px;
-font-weight:700;
-color:#22c55e;
-margin-bottom:25px;
-}
-
-button{
-border:none;
-padding:14px 26px;
+color:#fff;
+padding:15px 22px;
 border-radius:12px;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-}
-
-.buybtn{
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:white;
-box-shadow:0 0 20px #2563eb;
-}
-
-.buybtn:hover{
-transform:translateY(-3px);
-box-shadow:0 0 30px #2563eb;
-}
-
-.submitbtn{
-background:linear-gradient(135deg,#22c55e,#16a34a);
-color:white;
-margin-top:15px;
-box-shadow:0 0 15px #22c55e;
-}
-
-.submitbtn:hover{
-transform:scale(1.05);
-}
-
-.box{
 display:none;
-margin-top:25px;
-animation:fade 0.5s ease;
-}
-
-.label{
-display:block;
-margin-bottom:10px;
-color:#cbd5f5;
-font-size:14px;
-}
-
-select,input{
-width:100%;
-padding:12px;
-margin-top:12px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,0.2);
-background:rgba(255,255,255,0.05);
-color:white;
-outline:none;
-}
-
-select:focus,input:focus{
-border-color:#60a5fa;
-box-shadow:0 0 10px #2563eb;
-}
-
-#qrcode{
-margin-top:18px;
-}
-
-.paytext{
-margin-top:12px;
-color:#93c5fd;
-font-size:14px;
-}
-
-.waitbox{
-background:rgba(251,191,36,0.1);
 border:1px solid #facc15;
-color:#fde68a;
-padding:15px;
-border-radius:12px;
 }
 
-.successbox{
-background:rgba(34,197,94,0.1);
-border:1px solid #22c55e;
-padding:20px;
-border-radius:15px;
+/* MOBILE */
+@media(max-width:600px){
+.hero h1{font-size:30px}
+.price{font-size:32px}
+.card{padding:30px 20px}
 }
-
-.link a{
-display:block;
-margin-top:12px;
-padding:13px;
-border-radius:12px;
-text-decoration:none;
-color:white;
-font-weight:600;
-background:linear-gradient(135deg,#2563eb,#1e40af);
-transition:.3s;
-}
-
-.link a:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #2563eb;
-}
-
 </style>
-  
 </head>
 
 <body>
 
 <div class="wrapper">
 
-  <!-- HERO SECTION -->
 <section class="hero">
 <h1>Master Digital Marketing in 7 Days</h1>
-<p>Learn SEO • Ads • Affiliate • Sales Funnels • Automation</p>
+<p>SEO • Ads • Affiliate • Funnels • Automation</p>
 
 <div class="badges">
-<span>✔ Lifetime Access</span>
-<span>✔ Instant Download</span>
-<span>✔ Beginner Friendly</span>
+<span>Lifetime Access</span>
+<span>Instant Download</span>
+<span>Beginner Friendly</span>
 </div>
 
 <div class="countdown" id="countdown"></div>
-
 <button onclick="start()" class="cta">Get Instant Access — NPR 299</button>
-
 <div class="stock" id="stock"></div>
 </section>
 
-
-<!-- TRUST BAR -->
 <section class="trust">
 <div>⭐ 4.9 Rating</div>
-<div>👨‍🎓 4,000+ Students</div>
+<div>👨‍🎓 4000+ Students</div>
 <div>🌍 Worldwide Access</div>
 <div>🔒 Secure Payment</div>
 </section>
@@ -361,7 +341,6 @@ box-shadow:0 0 20px #2563eb;
 <div class="price">NPR 299</div>
 
 <button class="buybtn" onclick="start()">Buy Now</button>
-
 
 <div id="step1" class="box">
 
@@ -374,6 +353,12 @@ box-shadow:0 0 20px #2563eb;
 <option value="Bank">Bank Transfer</option>
 </select>
 
+<div class="payicons">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Khalti_Digital_Wallet_Logo.png/320px-Khalti_Digital_Wallet_Logo.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Esewa_logo.webp/512px-Esewa_logo.webp.png">
+<img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png">
+</div>
+
 <div id="qrcode"></div>
 <p id="paytext" class="paytext"></p>
 
@@ -382,78 +367,52 @@ box-shadow:0 0 20px #2563eb;
 <input id="paid" placeholder="Paid Amount">
 
 <button class="submitbtn" onclick="submitPayment()">Submit Payment</button>
-
 </div>
 
-
-<div id="wait" class="box waitbox">
-⏳ Waiting Verification...
-</div>
-
+<div id="wait" class="box waitbox">⏳ Waiting Verification...</div>
 
 <div id="download" class="box successbox">
-
 <h2>✔ Payment Verified</h2>
 <p>Your course is ready</p>
 
 <div class="link">
-<a href="https://drive.google.com/">Google Drive</a>
-<a href="https://example.com/file.zip">Direct Download</a>
-<a href="https://t.me/">Telegram</a>
-<a href="mailto:?subject=Digital Marketing Course&body=Download link: https://example.com/file.zip">Send to Email</a>
+<a href="#">Google Drive</a>
+<a href="#">Direct Download</a>
+<a href="#">Telegram</a>
+<a href="#">Send to Email</a>
+</div>
+</div>
 </div>
 
-</div>
-<!-- FEATURES -->
 <section class="features">
-
 <h2>What You'll Learn</h2>
-
 <div class="grid">
-
 <div class="boxf">📈 Facebook Ads Mastery</div>
 <div class="boxf">🎯 Sales Funnel Blueprint</div>
 <div class="boxf">🤖 Automation Systems</div>
 <div class="boxf">💰 Passive Income Strategy</div>
 <div class="boxf">🔎 SEO Ranking Secrets</div>
 <div class="boxf">📊 Analytics Tracking</div>
-
 </div>
 </section>
 
-
-<!-- TESTIMONIALS -->
 <section class="testimonials">
-
 <h2>Student Results</h2>
-
-<div class="slider" id="slider">
-
+<div id="slider">
 <div class="slide">“I earned my first $500 online in 10 days.” — Rahul</div>
-<div class="slide">“Best course ever. Clear and practical.” — Sita</div>
-<div class="slide">“I finally understand ads properly.” — Arjun</div>
-
+<div class="slide">“Best course ever.” — Sita</div>
+<div class="slide">“Ads finally make sense.” — Arjun</div>
 </div>
 </section>
 
-
-<!-- GUARANTEE -->
 <section class="guarantee">
-<h2>30-Day Money Back Guarantee</h2>
-<p>If you don't like the course, we refund instantly.</p>
+<h2>30 Day Money Back Guarantee</h2>
+<p>If you don't like it, we refund.</p>
 </section>
 
-
-<!-- SCARCITY BAR -->
-<div class="scarcity">
-⚡ 73% Seats Already Claimed
-</div>
-
-
-<!-- LIVE SALES POPUP -->
+<div class="scarcity">⚡ 73% Seats Already Claimed</div>
 <div class="popup" id="popup"></div>
-  
-</div>
+
 </div>
 
 <script>
@@ -496,117 +455,14 @@ new QRCode(qrDiv,{text:JSON.stringify(qrData),width:200,height:200});
 
 const text=document.getElementById("paytext");
 
-if(!method){
-text.innerText="";
-return;
-}
-
 text.innerText =
 method==="Bank"
 ? "Scan QR or transfer NPR "+FULL_AMOUNT
 : method+" QR ready. Pay NPR "+FULL_AMOUNT;
 }
-
-async function submitPayment(){
-
-const email=document.getElementById("email").value;
-const txn=document.getElementById("txn").value;
-const paidAmount=parseInt(document.getElementById("paid").value);
-
-if(!email||!txn||isNaN(paidAmount))
-return alert("Fill all fields");
-
-if(paidAmount!==FULL_AMOUNT)
-return alert("Exact payment must be NPR "+FULL_AMOUNT);
-
-try{
-
-const res=await fetch(BASE+"/submit-payment",{
-method:"POST",
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({
-email,
-txn,
-paidAmount,
-method:document.getElementById("method").value
-})
-});
-
-const data=await res.json();
-
-if(res.ok){
-alert(data.message);
-document.getElementById("wait").style.display="block";
-}
-else alert(data.message);
-
-}catch{
-alert("Server connection error");
-}
-}
-
-setInterval(async ()=>{
-const txn=document.getElementById("txn").value;
-if(!txn) return;
-
-try{
-const res=await fetch(BASE+"/check/"+txn);
-const data=await res.json();
-
-if(data.verified)
-document.getElementById("download").style.display="block";
-
-}catch{}
-},5000);
 </script>
-  
+
 <script>
-/* STORE LAST TXN WITHOUT MODIFYING ORIGINAL FUNCTION */
-let LAST_TXN = "";
-
-// Hook into button click instead of editing submitPayment()
-document.querySelector("button[onclick='submitPayment()']")
-.addEventListener("click",()=>{
-    LAST_TXN = document.getElementById("txn").value.trim();
-});
-
-
-/* CHECK VERIFICATION USING STORED TXN */
-setInterval(async ()=>{
-    if(!LAST_TXN) return;
-
-    try{
-        const res = await fetch(BASE+"/check/"+LAST_TXN);
-        const data = await res.json();
-
-        if(data.verified){
-
-            // show download
-            document.getElementById("download").style.display="block";
-
-            // hide waiting box
-            document.getElementById("wait").style.display="none";
-
-            // reset form fields
-            document.getElementById("email").value="";
-            document.getElementById("txn").value="";
-            document.getElementById("paid").value="";
-            document.getElementById("method").value="";
-
-            // remove QR
-            document.getElementById("qrcode").innerHTML="";
-            document.getElementById("paytext").innerText="";
-
-            // stop checking
-            LAST_TXN="";
-        }
-
-    }catch(e){}
-},3000);
-              </script>
-  <script>
-
-// COUNTDOWN TIMER
 let time = 600;
 setInterval(()=>{
 let m=Math.floor(time/60);
@@ -616,8 +472,6 @@ document.getElementById("countdown").innerText =
 if(time>0) time--;
 },1000);
 
-
-// STOCK COUNTER
 let stock = 17;
 setInterval(()=>{
 stock--;
@@ -626,8 +480,6 @@ document.getElementById("stock").innerText =
 "Only "+stock+" seats left";
 },8000);
 
-
-// TESTIMONIAL SLIDER
 let i=0;
 setInterval(()=>{
 let slides=document.querySelectorAll(".slide");
@@ -636,8 +488,6 @@ slides[i].style.display="block";
 i=(i+1)%slides.length;
 },3000);
 
-
-// FAKE SALES POPUP
 const names=["Ramesh","Aman","Sita","Raj","Anita","Rahul","Kiran"];
 
 setInterval(()=>{
@@ -645,12 +495,9 @@ let name=names[Math.floor(Math.random()*names.length)];
 let popup=document.getElementById("popup");
 popup.innerText=name+" just purchased";
 popup.style.display="block";
-
 setTimeout(()=>popup.style.display="none",3000);
-
 },7000);
+</script>
 
-  </script>
-  
 </body>
 </html>
