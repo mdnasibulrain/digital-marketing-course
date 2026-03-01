@@ -19,7 +19,117 @@ body{
 background:#000;
 color:#fff;
 }
+  
+/* ===== ULTRA UI ADDON ===== */
 
+/* glowing animated border card */
+.ultra-card{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+padding:70px 10%;
+border-top:1px solid #222;
+}
+
+.ultra-img{
+position:relative;
+}
+
+.ultra-img img{
+width:100%;
+border-radius:20px;
+box-shadow:0 0 40px #ffd00033;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+}
+
+.ultra-box h2{
+color:#ffd000;
+font-size:34px;
+margin-bottom:15px;
+}
+
+.ultra-box p{
+color:#ddd;
+margin-bottom:25px;
+line-height:1.6;
+}
+
+.ultra-btn{
+background:#ffd000;
+color:#000;
+padding:15px 30px;
+border-radius:12px;
+font-weight:bold;
+box-shadow:0 0 25px #ffd000;
+cursor:pointer;
+transition:.3s;
+}
+
+.ultra-btn:hover{
+transform:scale(1.08);
+}
+
+/* reverse layout */
+.reverse{
+grid-template-columns:1fr 1fr;
+}
+.reverse .ultra-img{order:2}
+
+/* animated glowing divider */
+.divider{
+height:1px;
+background:linear-gradient(90deg,transparent,#ffd000,transparent);
+margin:70px 0;
+animation:glowline 3s linear infinite;
+}
+
+@keyframes glowline{
+0%{opacity:.3}
+50%{opacity:1}
+100%{opacity:.3}
+}
+
+/* floating icons */
+.float-icons{
+position:absolute;
+top:-15px;
+right:-15px;
+font-size:28px;
+color:#ffd000;
+animation:spin 6s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+/* urgency pulse */
+.pulse{
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 #ffd00088}
+70%{box-shadow:0 0 0 20px transparent}
+100%{box-shadow:0 0 0 0 transparent}
+}
+
+/* responsive */
+@media(max-width:800px){
+.ultra-card{
+grid-template-columns:1fr;
+text-align:center;
+}
+.reverse .ultra-img{order:0}
+}
+  
 /* HERO */
 .hero{
 text-align:center;
@@ -329,6 +439,42 @@ border:1px solid #333;
 <div class="stock" id="stock"></div>
 </section>
 
+  <div class="divider"></div>
+
+<section class="ultra-card">
+
+<div class="ultra-img">
+<span class="float-icons">🚀</span>
+<img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=900&q=60">
+</div>
+
+<div class="ultra-box">
+<h2>Learn & Earn Online</h2>
+<p>Step-by-step digital marketing system that teaches you how to generate real online income using proven funnels and ad strategies.</p>
+<button onclick="start()" class="ultra-btn pulse">Start Learning Now</button>
+</div>
+
+</section>
+
+<div class="divider"></div>
+
+<section class="ultra-card reverse">
+
+<div class="ultra-img">
+<span class="float-icons">💰</span>
+<img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=900&q=60">
+</div>
+
+<div class="ultra-box">
+<h2>Real Income Skills</h2>
+<p>Not theory — only practical systems used by real marketers to generate leads, clients and passive income streams.</p>
+<button onclick="start()" class="ultra-btn pulse">Unlock Access</button>
+</div>
+
+</section>
+
+<div class="divider"></div>
+
 <section class="trust">
 <div>⭐ 4.9 Rating</div>
 <div>👨‍🎓 4,000+ Students</div>
@@ -415,7 +561,23 @@ border:1px solid #333;
 <h2>30-Day Money Back Guarantee</h2>
 <p>If you don't like the course, we refund instantly.</p>
 </section>
+  
+<section style="text-align:center;padding:100px 20px;background:#050505;border-top:1px solid #222">
 
+<h1 style="color:#ffd000;font-size:40px;margin-bottom:20px">
+Last Chance To Join
+</h1>
+
+<p style="color:#ccc;margin-bottom:35px;font-size:18px">
+Offer expires soon. Secure your access before price increases.
+</p>
+
+<button onclick="start()" class="cta pulse">
+Get Instant Access — NPR 299
+</button>
+
+</section>
+  
 <div class="scarcity">
 ⚡ 73% Seats Already Claimed
 </div>
