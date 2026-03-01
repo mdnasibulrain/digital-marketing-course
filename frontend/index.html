@@ -6,28 +6,188 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-body{font-family:Arial;background:#eef2f7;text-align:center;padding:40px}
-.card{background:white;padding:25px;border-radius:15px;max-width:420px;margin:auto;box-shadow:0 5px 25px rgba(0,0,0,.1)}
-h2{color:#2563eb}
-.price{font-size:28px;color:green;margin:15px}
-button{padding:12px 25px;border:none;border-radius:8px;background:#2563eb;color:white;cursor:pointer;margin:10px}
-button:hover{background:#1e40af}
-.box{display:none;margin-top:20px}
-input{padding:10px;width:85%;margin-top:10px;border-radius:6px;border:1px solid #ccc}
-.link a{display:block;background:green;color:white;padding:10px;margin:10px;border-radius:8px;text-decoration:none}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:
+radial-gradient(circle at 20% 20%, #1e3a8a, transparent),
+radial-gradient(circle at 80% 80%, #2563eb, transparent),
+#020617;
+color:white;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.wrapper{
+width:100%;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(18px);
+border-radius:25px;
+padding:35px;
+max-width:420px;
+margin:auto;
+text-align:center;
+box-shadow:
+0 0 40px rgba(37,99,235,.3),
+0 0 80px rgba(37,99,235,.2);
+animation:fade 0.7s ease;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+.title{
+font-size:26px;
+font-weight:700;
+margin-bottom:10px;
+color:#60a5fa;
+}
+
+.price{
+font-size:34px;
+font-weight:700;
+color:#22c55e;
+margin-bottom:25px;
+}
+
+button{
+border:none;
+padding:14px 26px;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.buybtn{
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+color:white;
+box-shadow:0 0 20px #2563eb;
+}
+
+.buybtn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 30px #2563eb;
+}
+
+.submitbtn{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:white;
+margin-top:15px;
+box-shadow:0 0 15px #22c55e;
+}
+
+.submitbtn:hover{
+transform:scale(1.05);
+}
+
+.box{
+display:none;
+margin-top:25px;
+animation:fade 0.5s ease;
+}
+
+.label{
+display:block;
+margin-bottom:10px;
+color:#cbd5f5;
+font-size:14px;
+}
+
+select,input{
+width:100%;
+padding:12px;
+margin-top:12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.05);
+color:white;
+outline:none;
+}
+
+select:focus,input:focus{
+border-color:#60a5fa;
+box-shadow:0 0 10px #2563eb;
+}
+
+#qrcode{
+margin-top:18px;
+}
+
+.paytext{
+margin-top:12px;
+color:#93c5fd;
+font-size:14px;
+}
+
+.waitbox{
+background:rgba(251,191,36,0.1);
+border:1px solid #facc15;
+color:#fde68a;
+padding:15px;
+border-radius:12px;
+}
+
+.successbox{
+background:rgba(34,197,94,0.1);
+border:1px solid #22c55e;
+padding:20px;
+border-radius:15px;
+}
+
+.link a{
+display:block;
+margin-top:12px;
+padding:13px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-weight:600;
+background:linear-gradient(135deg,#2563eb,#1e40af);
+transition:.3s;
+}
+
+.link a:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #2563eb;
+}
+
 </style>
+  
 </head>
 
 <body>
 
+<div class="wrapper">
+
 <div class="card">
-<h2>Digital Marketing Course</h2>
+
+<h1 class="title">Digital Marketing Course</h1>
 <div class="price">NPR 299</div>
 
-<button onclick="start()">Buy Now</button>
+<button class="buybtn" onclick="start()">Buy Now</button>
+
 
 <div id="step1" class="box">
-<h3>Select Payment Method</h3>
+
+<label class="label">Select Payment Method</label>
 
 <select id="method" onchange="generateQR()">
 <option value="">Select Payment</option>
@@ -36,32 +196,38 @@ input{padding:10px;width:85%;margin-top:10px;border-radius:6px;border:1px solid 
 <option value="Bank">Bank Transfer</option>
 </select>
 
-<div id="qrcode" style="margin-top:20px"></div>
-<p id="paytext"></p>
+<div id="qrcode"></div>
+<p id="paytext" class="paytext"></p>
 
 <input id="email" placeholder="Your Email">
 <input id="txn" placeholder="Transaction ID">
-<input id="paid" placeholder="Paid Amount in NPR">
+<input id="paid" placeholder="Paid Amount">
 
-<button onclick="submitPayment()">Submit Payment</button>
+<button class="submitbtn" onclick="submitPayment()">Submit Payment</button>
+
 </div>
 
-<div id="wait" class="box">
-<h3>Payment Submitted ⏳</h3>
-<p>Waiting verification...</p>
+
+<div id="wait" class="box waitbox">
+⏳ Waiting Verification...
 </div>
 
-<div id="download" class="box">
-<h2 style="color:green">Payment Verified ✔</h2>
-<p>Your course is ready:</p>
+
+<div id="download" class="box successbox">
+
+<h2>✔ Payment Verified</h2>
+<p>Your course is ready</p>
+
 <div class="link">
 <a href="https://drive.google.com/">Google Drive</a>
 <a href="https://example.com/file.zip">Direct Download</a>
 <a href="https://t.me/">Telegram</a>
 <a href="mailto:?subject=Digital Marketing Course&body=Download link: https://example.com/file.zip">Send to Email</a>
 </div>
+
 </div>
 
+</div>
 </div>
 
 <script>
