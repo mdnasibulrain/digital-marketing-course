@@ -133,7 +133,18 @@ input, select {
 input:focus, select:focus {
   outline:none; border-color:#ffd000; box-shadow:0 0 12px #ffd000aa;
 }
-#qrcode { margin-top:20px; }
+#qrcode{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+}
+
+#qrcode canvas{
+  background:#fff;
+  padding:12px;
+  border-radius:15px;
+  box-shadow:0 0 20px #ffd00055;
+}
 .paytext { margin-top:12px; color:#ffd000; font-size:14px; }
 .box { display:none; margin-top:25px; }
 
