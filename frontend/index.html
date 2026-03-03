@@ -5,16 +5,33 @@
 <title>Digital Marketing Course</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
+
+*{
+  box-sizing:border-box;
+}
+
 body {
   margin:0; padding:0; font-family:'Poppins',sans-serif; 
   background:#000; color:#fff;
   display:flex; justify-content:center; align-items:center; height:100vh;
 }
-.container {
-  background:#111; padding:50px; border-radius:25px; 
-  border:2px solid #ffd000; max-width:420px; width:100%; 
-  text-align:center; box-shadow:0 0 40px #ffd00044;
+
+/* MAIN CONTAINER */
+.container{
+  background:#111;
+  border:2px solid #ffd000;
+  border-radius:25px;
+  width:100%;
+  max-width:500px;
+  padding:35px 35px;
+  text-align:center;
+  box-shadow:0 0 40px #ffd00044;
+
+  /* Important for small devices */
+  max-height:95vh;
+  overflow-y:auto;
 }
+
 h1 {
   font-size:30px; color:#ffd000; margin-bottom:20px;
 }
@@ -91,8 +108,9 @@ input.filled, select.filled {
 }
 
 .accessbtn span { margin-right:10px; font-size:20px; }
+
 input, select {
-  width: 80%;           /* make inputs narrower */
+  width: 90%;           /* make inputs narrower */
   max-width: 300px;     /* optional: limit maximum width */
   padding:14px;
   margin:15px auto 0 auto; /* top margin + auto left/right for centering */
@@ -105,6 +123,13 @@ input, select {
   box-shadow:0 0 8px #ffd00044;
   display: block;       /* important to center with auto margins */
 }
+
+#method{
+  width:60%;
+  max-width:240px;
+  font-size:15px;
+}
+
 input:focus, select:focus {
   outline:none; border-color:#ffd000; box-shadow:0 0 12px #ffd000aa;
 }
@@ -334,165 +359,31 @@ button.submitbtn.shake {
   100%{transform:scale(1);}
 }
 
-/* ============================= */
-/* 📱 Mobile Devices (320px–480px) */
-/* ============================= */
-@media (max-width: 480px){
+/* RESPONSIVE BREAKPOINTS */
 
-  body{
-    padding:15px;
-    height:auto;
-  }
-
+/* Tablet */
+@media (min-width:768px){
   .container{
-    padding:25px 18px;
-    border-radius:18px;
-    max-width:100%;
-  }
-
-  h1{
-    font-size:22px;
-  }
-
-  .price{
-    font-size:26px;
-  }
-
-  button{
-    font-size:14px;
-    padding:12px 20px;
-  }
-
-  .accessbtn{
-    font-size:15px;
-    padding:12px 20px;
-  }
-
-  input, select{
-    width:95%;
-    font-size:13px;
-    padding:12px;
-  }
-
-  #qrcode canvas{
-    width:140px !important;
-    height:140px !important;
-  }
-
-  .popup-card{
-    padding:18px;
-  }
-
-  .wait-card{
-    padding:20px;
-  }
-
-  .gateway-icons img{
-    width:18px;
-    height:18px;
-  }
-
-  .trust-grid{
-    grid-template-columns:1fr;
-  }
-
-}
-
-
-/* ============================= */
-/* 📲 Tablet Devices (481px–768px) */
-/* ============================= */
-@media (min-width: 481px) and (max-width: 768px){
-
-  .container{
-    max-width:90%;
-    padding:35px;
-  }
-
-  h1{
-    font-size:26px;
-  }
-
-  .price{
-    font-size:30px;
-  }
-
-  button{
-    font-size:15px;
-  }
-
-  input, select{
-    width:90%;
-  }
-
-  #qrcode canvas{
-    width:160px !important;
-    height:160px !important;
-  }
-
-}
-
-
-/* ============================= */
-/* 🍎 iPad (769px–1024px) */
-/* ============================= */
-@media (min-width: 769px) and (max-width: 1024px){
-
-  .container{
-    max-width:500px;
+    max-width:600px;
     padding:45px;
   }
 
-  h1{
-    font-size:28px;
-  }
-
-  .price{
-    font-size:32px;
-  }
-
-  #qrcode canvas{
-    width:170px !important;
-    height:170px !important;
-  }
-
+  h1{ font-size:28px; }
+  .price{ font-size:32px; }
 }
 
-
-/* ============================= */
-/* 💻 Laptop (1025px–1440px) */
-/* ============================= */
-@media (min-width: 1025px) and (max-width: 1440px){
-
+/* Laptop */
+@media (min-width:1024px){
   .container{
-    max-width:480px;
+    max-width:650px;
   }
-
-  #qrcode canvas{
-    width:180px !important;
-    height:180px !important;
-  }
-
 }
 
-
-/* ============================= */
-/* 🖥 Desktop Large (1441px+) */
-/* ============================= */
-@media (min-width: 1441px){
-
+/* Desktop */
+@media (min-width:1440px){
   .container{
-    max-width:520px;
+    max-width:750px;
   }
-
-  h1{
-    font-size:32px;
-  }
-
-  .price{
-    font-size:36px;
-  }
-
 }
 
 </style>
