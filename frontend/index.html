@@ -333,6 +333,168 @@ button.submitbtn.shake {
   50%{transform:scale(1.05);}
   100%{transform:scale(1);}
 }
+
+/* ============================= */
+/* 📱 Mobile Devices (320px–480px) */
+/* ============================= */
+@media (max-width: 480px){
+
+  body{
+    padding:15px;
+    height:auto;
+  }
+
+  .container{
+    padding:25px 18px;
+    border-radius:18px;
+    max-width:100%;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  .price{
+    font-size:26px;
+  }
+
+  button{
+    font-size:14px;
+    padding:12px 20px;
+  }
+
+  .accessbtn{
+    font-size:15px;
+    padding:12px 20px;
+  }
+
+  input, select{
+    width:95%;
+    font-size:13px;
+    padding:12px;
+  }
+
+  #qrcode canvas{
+    width:140px !important;
+    height:140px !important;
+  }
+
+  .popup-card{
+    padding:18px;
+  }
+
+  .wait-card{
+    padding:20px;
+  }
+
+  .gateway-icons img{
+    width:18px;
+    height:18px;
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* ============================= */
+/* 📲 Tablet Devices (481px–768px) */
+/* ============================= */
+@media (min-width: 481px) and (max-width: 768px){
+
+  .container{
+    max-width:90%;
+    padding:35px;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  .price{
+    font-size:30px;
+  }
+
+  button{
+    font-size:15px;
+  }
+
+  input, select{
+    width:90%;
+  }
+
+  #qrcode canvas{
+    width:160px !important;
+    height:160px !important;
+  }
+
+}
+
+
+/* ============================= */
+/* 🍎 iPad (769px–1024px) */
+/* ============================= */
+@media (min-width: 769px) and (max-width: 1024px){
+
+  .container{
+    max-width:500px;
+    padding:45px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .price{
+    font-size:32px;
+  }
+
+  #qrcode canvas{
+    width:170px !important;
+    height:170px !important;
+  }
+
+}
+
+
+/* ============================= */
+/* 💻 Laptop (1025px–1440px) */
+/* ============================= */
+@media (min-width: 1025px) and (max-width: 1440px){
+
+  .container{
+    max-width:480px;
+  }
+
+  #qrcode canvas{
+    width:180px !important;
+    height:180px !important;
+  }
+
+}
+
+
+/* ============================= */
+/* 🖥 Desktop Large (1441px+) */
+/* ============================= */
+@media (min-width: 1441px){
+
+  .container{
+    max-width:520px;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .price{
+    font-size:36px;
+  }
+
+}
+
 </style>
 </head>
 <body>
