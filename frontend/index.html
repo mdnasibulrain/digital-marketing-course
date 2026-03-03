@@ -5,333 +5,138 @@
 <title>Digital Marketing Course</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
+/* Reset & Base */
+* { box-sizing: border-box; }
 body {
-  margin:0; padding:0; font-family:'Poppins',sans-serif; 
+  margin:0; padding:0; font-family:'Poppins',sans-serif;
   background:#000; color:#fff;
-  display:flex; justify-content:center; align-items:center; height:100vh;
+  display:flex; justify-content:center; align-items:center; min-height:100vh;
 }
+
+/* Container */
 .container {
-  background:#111; padding:50px; border-radius:25px; 
-  border:2px solid #ffd000; max-width:420px; width:100%; 
+  background:#111; padding:5vw; border-radius:25px;
+  border:2px solid #ffd000; max-width:420px; width:90%;
   text-align:center; box-shadow:0 0 40px #ffd00044;
 }
-h1 {
-  font-size:30px; color:#ffd000; margin-bottom:20px;
-}
-.price {
-  font-size:34px; font-weight:700; color:#fff; margin-bottom:30px;
-}
+
+/* Headings & Price */
+h1 { font-size:6vw; color:#ffd000; margin-bottom:2vh; }
+.price { font-size:7vw; font-weight:700; color:#fff; margin-bottom:3vh; }
+
+/* Buttons */
 button {
-  border:none; border-radius:15px; font-weight:700; cursor:pointer; padding:16px 32px;
-  transition:.3s; font-size:16px;
+  border:none; border-radius:15px; font-weight:700; cursor:pointer;
+  padding:3vw 6vw; transition:.3s; font-size:4vw;
 }
 .buybtn {
   background:#ffd000; color:#000; box-shadow:0 0 25px #ffd000;
 }
 .buybtn:hover { transform:scale(1.05); }
 .submitbtn {
-  background:#22c55e; color:#000; margin-top:15px; box-shadow:0 0 25px #22c55e;
-}
-input.filled, select.filled {
-  
-  border-color: #22c55e;       /* optional: green border */
-  
+  background:#22c55e; color:#000; margin-top:2vh; box-shadow:0 0 25px #22c55e;
 }
 .submitbtn:hover { transform:scale(1.05); }
 .accessbtn {
   background:linear-gradient(90deg,#ffb200,#ffd700);
-  color:#000;
-  margin:20px auto 0 auto; /* center horizontally */
-  padding:16px 32px;
-  font-size:18px;
-  font-weight:700;
-  border-radius:20px;
-  box-shadow:0 0 25px #ffb200;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  color:#000; margin:3vh auto 0 auto;
+  padding:3vw 6vw; font-size:4.5vw; font-weight:700;
+  border-radius:20px; box-shadow:0 0 25px #ffb200;
+  display:flex; align-items:center; justify-content:center;
 }
+.accessbtn span { margin-right:3vw; font-size:5vw; }
+
+/* Success Box */
 .successbox {
-  background: #111;
-  border: 2px solid #22c55e;
-  padding: 30px 20px;
-  border-radius: 20px;
+  background: #111; border: 2px solid #22c55e;
+  padding:4vh 3vw; border-radius: 20px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; gap:1.5vh;
+  min-height:12vh;
+  animation: pop .4s ease;
+}
+@keyframes pop{ from{transform:scale(.7);opacity:0;} to{transform:scale(1);opacity:1;} }
+.successbox h2 { margin:0; font-size:5vw; color:#22c55e; }
+.successbox p { margin:0; font-size:4vw; text-align:center; }
 
-  display: flex;             /* use flex layout */
-  flex-direction: column;    /* stack children vertically */
-  justify-content: center;   /* vertical centering */
-  align-items: center;       /* horizontal centering */
-  text-align: center;        /* center text inside */
-  gap: 15px;                 /* spacing between elements */
-  min-height: 100px;         /* ensures vertical centering */
-}
-
-.successbox{
- animation: pop .4s ease;
-}
-@keyframes pop{
- from{transform:scale(.7); opacity:0;}
- to{transform:scale(1); opacity:1;}
-}
-
-.successbox h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #22c55e;
-}
-.successbox p {
-  margin: 0;
-  font-size: 16px;
-  color: #fff;
-}
-.successbox p {
-  text-align: center;
-  margin: 10px 0 0 0; /* optional: top margin for spacing */
-  font-size: 16px;    /* optional: make it slightly bigger if you want */
-}
-
-.accessbtn span { margin-right:10px; font-size:20px; }
+/* Inputs & Select */
 input, select {
-  width: 80%;           /* make inputs narrower */
-  max-width: 300px;     /* optional: limit maximum width */
-  padding:14px;
-  margin:15px auto 0 auto; /* top margin + auto left/right for centering */
-  border-radius:12px;
-  border:1px solid #333;
-  background:#111;
-  color:#fff;
-  font-size:14px;
-  transition:.3s;
-  box-shadow:0 0 8px #ffd00044;
-  display: block;       /* important to center with auto margins */
+  width: 80%; max-width:300px; padding:3vw; margin:2vh auto 0 auto;
+  border-radius:12px; border:1px solid #333; background:#111; color:#fff;
+  font-size:4vw; transition:.3s; box-shadow:0 0 8px #ffd00044; display:block;
 }
-input:focus, select:focus {
-  outline:none; border-color:#ffd000; box-shadow:0 0 12px #ffd000aa;
-}
-#qrcode { margin-top:20px; }
-.paytext { margin-top:12px; color:#ffd000; font-size:14px; }
-.box { display:none; margin-top:25px; }
+input:focus, select:focus { outline:none; border-color:#ffd000; box-shadow:0 0 12px #ffd000aa; }
+input.filled, select.filled { border-color:#22c55e; }
+input.error, select.error { border-color:#ef4444; box-shadow:0 0 12px #ef4444aa; animation:shake 0.3s; }
 
-.link a {
-  display:block; margin-top:15px; padding:14px; border-radius:12px; 
-  text-decoration:none; font-weight:700; color:#000; background:#22c55e;
-}
+/* Shake Animation */
+@keyframes shake{0%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}100%{transform:translateX(0);}}
+
+/* QR Code */
+#qrcode { margin-top:2vh; }
+.paytext { margin-top:1vh; color:#ffd000; font-size:3.5vw; }
+
+/* Box Hidden */
+.box { display:none; margin-top:2vh; }
+
+/* Links */
+.link a { display:block; margin-top:2vh; padding:3vw; border-radius:12px; text-decoration:none; font-weight:700; color:#000; background:#22c55e; }
 .link a:hover { transform:scale(1.05); }
 
-input.error, select.error {
-  border-color: #ef4444; /* red border for errors */
-  box-shadow: 0 0 12px #ef4444aa;
-  animation: shake 0.3s;
+/* Overlay Popups */
+.popup-overlay, .wait-popup {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,.55); backdrop-filter:blur(7px);
+  display:none; justify-content:center; align-items:center; z-index:9999;
 }
-
-@keyframes shake {
-  0% { transform: translateX(0px); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0px); }
+.popup-card, .wait-card {
+  background:#111; border-radius:20px; padding:5vw; text-align:center;
+  box-shadow:0 0 35px #22c55e66; animation:popupScale .35s ease; width:90%; max-width:400px;
 }
+.popup-card h2{ color:#22c55e; font-size:5vw; margin-bottom:1vh; }
+.popup-card p{ color:#ddd; font-size:3.5vw; margin-bottom:2vh; line-height:1.4; }
+.popup-card button{ background:#22c55e; border:none; padding:3vw 6vw; border-radius:12px; font-weight:700; cursor:pointer; transition:.25s; font-size:4vw; }
+.popup-card button:hover{ transform:scale(1.07); }
 
-button.submitbtn.shake {
-  animation: shake 0.3s;
+.wait-card p{ color:#fff; font-size:4vw; margin-top:1vh; line-height:1.4; }
+.wait-icon{ font-size:10vw; margin-bottom:1vh; animation:spin 1s linear infinite; }
+
+@keyframes popupScale{ from{opacity:0; transform:scale(.7);} to{opacity:1; transform:scale(1);} }
+@keyframes waitScale{ from{opacity:0; transform:scale(.7);} to{opacity:1; transform:scale(1);} }
+@keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+/* Payment Info */
+.payment-info{ margin-top:4vh; text-align:center; padding-top:3vh; border-top:1px solid #333; }
+.secure-line{ color:#ffd000; font-weight:800; font-size:3.5vw; margin-bottom:2vh; }
+.gateway-icons{ display:flex; justify-content:center; gap:4vw; margin-bottom:2vh; }
+.gateway-icons img{ width:10vw; height:10vw; padding:2vw; border-radius:8px; box-shadow:0 0 2px #ffd00066; transition:.3s; }
+.gateway-icons img:hover{ transform:scale(1.1); box-shadow:0 0 10px #ffd000; }
+.scan-text{ font-size:3vw; color:#bbb; margin-bottom:2vh; line-height:1.4; }
+
+/* Trust Grid */
+.trust-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2vw; margin-bottom:2vh; }
+.trust-item{ background:#111; border:1px solid #333; padding:2vw; border-radius:10px; font-size:3vw; color:#ddd; box-shadow:0 0 10px #000 inset; }
+
+/* Verified Badge */
+.verified-badge{ display:inline-block; background:linear-gradient(90deg,#22c55e,#16a34a); padding:2vw 5vw; border-radius:20px; font-size:3vw; font-weight:700; color:#000; box-shadow:0 0 15px #22c55e88; animation:pulse 2s infinite; }
+@keyframes pulse{ 0%{transform:scale(1);} 50%{transform:scale(1.05);} 100%{transform:scale(1);} }
+
+/* Media Queries for Large Screens */
+@media (min-width:768px){
+  h1 { font-size:28px; }
+  .price { font-size:34px; }
+  button, .accessbtn { font-size:16px; padding:14px 28px; }
+  input, select { font-size:14px; padding:12px; width:80%; max-width:300px; }
+  .gateway-icons img{ width:40px; height:40px; padding:5px; }
+  .wait-icon{ font-size:35px; }
+  .scan-text, .secure-line, .trust-item, .verified-badge { font-size:14px; }
 }
-
-/* overlay background */
-.popup-overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(7px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-/* popup card */
-.popup-card{
-  background:#111;
-  border:2px solid #22c55e;
-  border-radius:20px;
-  padding:22px 28px;
-  text-align:center;
-  box-shadow:0 0 35px #22c55e66;
-  animation:popupScale .35s ease;
-  width:auto;
-  max-width:90%;
-}
-
-/* title */
-.popup-card h2{
-  color:#22c55e;
-  font-size:20px;
-  margin-bottom:6px;
-}
-
-/* text */
-.popup-card p{
-  color:#ddd;
-  font-size:14px;
-  margin-bottom:18px;
-  line-height:1.4;
-}
-
-/* button */
-.popup-card button{
-  background:#22c55e;
-  border:none;
-  padding:9px 28px;
-  border-radius:12px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.25s;
-}
-.popup-card button:hover{
-  transform:scale(1.07);
-}
-
-/* animation */
-@keyframes popupScale{
-  from{
-    opacity:0;
-    transform:scale(.7);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-/* Waiting Verification popup floating center */
-.wait-popup{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(7px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9998; /* slightly below thankPopup */
-}
-
-.wait-card{
-  background:#111;
-  border:2px solid #ffd700;
-  border-radius:20px;
-  padding:25px 35px;
-  text-align:center;
-  box-shadow:0 0 40px #ffd70066;
-  animation:waitScale .35s ease;
-  width:auto;
-  max-width:80%;
-}
-
-.wait-card p{
-  color:#fff;
-  font-size:16px;
-  margin-top:10px;
-  line-height:1.4;
-}
-
-.wait-icon{
-  font-size:35px;
-  margin-bottom:10px;
-  animation:spin 1s linear infinite;
-}
-
-@keyframes waitScale{
-  from{opacity:0; transform:scale(.7);}
-  to{opacity:1; transform:scale(1);}
-}
-
-@keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-
-.payment-info{
-  margin-top:30px;
-  text-align:center;
-  padding-top:20px;
-  border-top:1px solid #333;
-}
-
-.secure-line{
-  color:#ffd000;
-  font-weight:800;
-  font-size:15px;
-  margin-bottom:15px;
-}
-
-.gateway-icons{
-  display:flex;
-  justify-content:center;
-  gap:22px;
-  margin-bottom:15px;
-}
-
-.gateway-icons img{
-  width:20px;
-  height:20px;
-  padding:5px;
-  border-radius:8px;
-  box-shadow:0 0 2px #ffd00066;
-  transition:.3s;
-}
-
-.gateway-icons img:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 10px #ffd000;
-}
-
-.scan-text{
-  font-size:13px;
-  color:#bbb;
-  margin-bottom:18px;
-  line-height:1.5;
-}
-
-/* Trust grid */
-
-.trust-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.trust-item{
-  background:#111;
-  border:1px solid #333;
-  padding:8px;
-  border-radius:10px;
-  font-size:12px;
-  color:#ddd;
-  box-shadow:0 0 10px #000 inset;
-}
-
-/* verified badge */
-
-.verified-badge{
-  display:inline-block;
-  background:linear-gradient(90deg,#22c55e,#16a34a);
-  padding:8px 20px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
-  color:#000;
-  box-shadow:0 0 15px #22c55e88;
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
+@media (min-width:1200px){
+  .container{ max-width:500px; padding:40px; }
+  h1{ font-size:32px; }
+  .price{ font-size:36px; }
+  button, .accessbtn{ font-size:18px; padding:16px 32px; }
 }
 </style>
 </head>
@@ -360,51 +165,24 @@ button.submitbtn.shake {
 
     <button class="submitbtn" onclick="submitPayment()">Submit Payment</button>
   </div>
-  
- <!-- Premium Payment Trust Section -->
-<div class="payment-info">
 
-  <p class="secure-line">
-   We are accept
-  </p>
-
-  <div class="gateway-icons">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Khalti_Digital_Wallet_Logo.png/320px-Khalti_Digital_Wallet_Logo.png" alt="Khalti">
-    
-    <img src="https://github.com/mdnasibulrain/digital-marketing-course/blob/e47c1838c632624474044c65a46fb5093321e454/Img/Gateway/Esewa.png" alt="eSewa">
-    
-    <img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Bank">
+  <!-- Premium Payment Trust Section -->
+  <div class="payment-info">
+    <p class="secure-line">We accept</p>
+    <div class="gateway-icons">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Khalti_Digital_Wallet_Logo.png/320px-Khalti_Digital_Wallet_Logo.png" alt="Khalti">
+      <img src="https://github.com/mdnasibulrain/digital-marketing-course/blob/e47c1838c632624474044c65a46fb5093321e454/Img/Gateway/Esewa.png" alt="eSewa">
+      <img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Bank">
+    </div>
+    <p class="scan-text">Scan QR code using any Wallet or Banking App.</p>
+    <div class="trust-grid">
+      <div class="trust-item">⭐ 4.9/5 Student Rating</div>
+      <div class="trust-item">👨‍🎓 1,200+ Students</div>
+      <div class="trust-item">⚡ Instant Course Access</div>
+      <div class="trust-item">🛡 100% Safe Payment</div>
+    </div>
+    <div class="verified-badge">✅ Verified Payment System</div>
   </div>
-
-  <p class="scan-text">
-    Scan QR code using any Wallet or Banking App.
-  </p>
-
-  <div class="trust-grid">
-
-    <div class="trust-item">
-      ⭐ 4.9/5 Student Rating
-    </div>
-
-    <div class="trust-item">
-      👨‍🎓 1,200+ Students
-    </div>
-
-    <div class="trust-item">
-      ⚡ Instant Course Access
-    </div>
-
-    <div class="trust-item">
-      🛡 100% Safe Payment
-    </div>
-
-  </div>
-
-  <div class="verified-badge">
-    ✅ Verified Payment System
-  </div>
-
-</div>
 
   <div id="downloadBox" class="box successbox">
     <h2>💵 Payment Verified ✅</h2>
@@ -415,12 +193,9 @@ button.submitbtn.shake {
 
 <div id="thankPopup" class="popup-overlay">
   <div class="popup-card">
-
     <h2>Thank You! ✅</h2>
-    <p>Payment details have been received.<br>Please Wait...   🎉 Verification in Progress<br>Your product will be unlocked in a few seconds.</p>
-
+    <p>Payment details have been received.<br>Please Wait... 🎉 Verification in Progress<br>Your product will be unlocked in a few seconds.</p>
     <button onclick="closePopup()">OK</button>
-
   </div>
 </div>
 
@@ -431,13 +206,14 @@ button.submitbtn.shake {
   </div>
 </div>
 
+<!-- JS (exactly same) -->
 <script>
 const BASE = "https://digital-marketing-course.onrender.com";
 const FULL_AMOUNT = 299;
 let LAST_TXN = "";
 
 function start(){
-  document.getElementById("downloadBox").style.display="none"; // hide success card
+  document.getElementById("downloadBox").style.display="none";
   document.getElementById("paymentBox").style.display = "block";
 }
 
@@ -464,127 +240,63 @@ async function submitPayment(){
   const method = document.getElementById("method");
 
   let hasError = false;
-
-  // Reset previous errors
   [email, txn, paid, method].forEach(f => f.classList.remove("error"));
 
-  // Check payment method
-  if(!method.value){
-    method.classList.add("error");
-    hasError = true;
-  }
-
-  // Check email, txn, paid
+  if(!method.value){ method.classList.add("error"); hasError = true; }
   if(!email.value.trim()){ email.classList.add("error"); hasError = true; }
   if(!txn.value.trim()){ txn.classList.add("error"); hasError = true; }
-  if(!paid.value.trim() || isNaN(parseInt(paid.value)) || parseInt(paid.value) !== FULL_AMOUNT){
-    paid.classList.add("error"); hasError = true;
-  }
+  if(!paid.value.trim() || isNaN(parseInt(paid.value)) || parseInt(paid.value) !== FULL_AMOUNT){ paid.classList.add("error"); hasError = true; }
 
   if(hasError){
     const btn = document.querySelector(".submitbtn");
     btn.classList.add("shake");
     setTimeout(()=>btn.classList.remove("shake"), 300);
-    return; // stop submission
+    return;
   }
 
-  // Show waiting box
-  
   LAST_TXN = txn.value.trim();
-
   try{
     const res = await fetch(BASE+"/submit-payment",{
       method:"POST",
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email: email.value.trim(),
-        txn: txn.value.trim(),
-        paidAmount: parseInt(paid.value),
-        method: method.value
-      })
+      body:JSON.stringify({ email: email.value.trim(), txn: txn.value.trim(), paidAmount: parseInt(paid.value), method: method.value })
     });
     const data = await res.json();
     if(!res.ok) alert(data.message || "Server error");
-    else{
-  showPopup();
-}
-  }catch{
-    alert("Server connection error");
-  }
+    else showPopup();
+  }catch{ alert("Server connection error"); }
 }
 
-// Auto-check verification
 setInterval(async ()=>{
   if(!LAST_TXN) return;
   try{
     const res = await fetch(BASE+"/check/"+LAST_TXN);
     const data = await res.json();
-    
     if(data.verified){
-
-  // hide payment UI
-  document.getElementById("paymentBox").style.display="none";
-  document.getElementById("waitBox").style.display="none";
-
-  // show success card
-  document.getElementById("downloadBox").style.display="flex";
-
-  // reset fields
-  const fields = document.querySelectorAll("input, select");
-  fields.forEach(f=>{
-    f.value="";
-    f.classList.remove("filled");
-  });
-
-  document.getElementById("qrcode").innerHTML="";
-  document.getElementById("paytext").innerText="";
-  LAST_TXN="";
-}
+      document.getElementById("paymentBox").style.display="none";
+      document.getElementById("waitBox").style.display="none";
+      document.getElementById("downloadBox").style.display="flex";
+      const fields = document.querySelectorAll("input, select");
+      fields.forEach(f=>{ f.value=""; f.classList.remove("filled"); });
+      document.getElementById("qrcode").innerHTML="";
+      document.getElementById("paytext").innerText="";
+      LAST_TXN="";
+    }
   }catch{}
 },3000);
 
-// Add green background when user fills the field
 const inputs = document.querySelectorAll('input, select');
 inputs.forEach(el => {
-  el.addEventListener('input', () => {
-    if(el.value.trim() !== '') el.classList.add('filled');
-    else el.classList.remove('filled');
-  });
+  el.addEventListener('input', () => { if(el.value.trim() !== '') el.classList.add('filled'); else el.classList.remove('filled'); });
 });
-
-// Auto-toggle green border when user fills input or selects payment method
 const fields = document.querySelectorAll('input, select');
 fields.forEach(field => {
-  // Trigger on typing or input
-  field.addEventListener('input', () => {
-    // Remove red error border if present
-    if(field.classList.contains('error')) field.classList.remove('error');
-    // Add green border when field has value
-    if(field.value.trim() !== '') field.classList.add('filled');
-    else field.classList.remove('filled');
-  });
-
-  // Trigger on select change
-  field.addEventListener('change', () => {
-    if(field.classList.contains('error')) field.classList.remove('error');
-    if(field.value.trim() !== '') field.classList.add('filled');
-    else field.classList.remove('filled');
-  });
+  field.addEventListener('input', () => { if(field.classList.contains('error')) field.classList.remove('error'); if(field.value.trim() !== '') field.classList.add('filled'); else field.classList.remove('filled'); });
+  field.addEventListener('change', () => { if(field.classList.contains('error')) field.classList.remove('error'); if(field.value.trim() !== '') field.classList.add('filled'); else field.classList.remove('filled'); });
 });
 
-function showPopup(){
-  document.getElementById("thankPopup").style.display="flex";
-}
-
-function closePopup(){
-  // hide Thank You popup
-  document.getElementById("thankPopup").style.display="none";
-  
-  // show floating Waiting Verification popup **ONLY NOW**
-  document.getElementById("waitBox").style.display="flex";
-}
-
+function showPopup(){ document.getElementById("thankPopup").style.display="flex"; }
+function closePopup(){ document.getElementById("thankPopup").style.display="none"; document.getElementById("waitBox").style.display="flex"; }
 </script>
-
 </body>
 </html>
