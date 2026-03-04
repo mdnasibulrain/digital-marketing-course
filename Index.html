@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Digital Product</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(34, 197, 94, 0.5); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes slide-in-left {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slide-in-right {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slide-in-up {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    @keyframes notification-pop {
+      0% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+      10% { transform: translateX(0) scale(1.05); opacity: 1; }
+      15% { transform: translateX(0) scale(1); opacity: 1; }
+      85% { transform: translateX(0) scale(1); opacity: 1; }
+      100% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #FFD700, #22C55E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #FFD700, #22C55E);
+    }
+    
+    .gradient-border {
+      border: 2px solid transparent;
+      background: linear-gradient(#0f0f0f, #0f0f0f) padding-box,
+                  linear-gradient(135deg, #FFD700, #22C55E) border-box;
+    }
+    
+    .glow-button {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+    }
+    
+    .notification-slide {
+      animation: notification-pop 4s ease-in-out forwards;
+    }
+    
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .chapter-modal {
+      backdrop-filter: blur(10px);
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+    }
+    
+    .bonus-card {
+      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    }
+    
+    .whatsapp-btn {
+      animation: pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite;
+    }
+    
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(#FFD700, #22C55E); border-radius: 4px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-[#0a0a0a] text-white overflow-x-hidden">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- Top Sticky Urgency Bar -->
+   <div id="top-bar" class="sticky top-0 z-50 gradient-bg py-3 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-4 text-center"><span class="text-black font-bold text-sm md:text-base animate-pulse">⚡ Hurry! Only <span id="copies-left">20</span> Copies Left</span> <span class="text-black font-semibold text-sm md:text-base">Today: NPR <span id="top-sale-price">299</span> <span class="line-through opacity-70">NPR <span id="top-original-price">499</span></span></span>
+     <div class="flex items-center gap-2 bg-black/20 rounded-full px-4 py-1"><span class="text-black font-bold text-sm" id="countdown-hours">02</span>:<span class="text-black font-bold text-sm" id="countdown-minutes">45</span>:<span class="text-black font-bold text-sm" id="countdown-seconds">30</span>
+     </div>
+    </div>
+   </div><!-- Sale Notification Popup -->
+   <div id="notification-popup" class="fixed left-4 bottom-24 z-40 hidden">
+    <div class="bg-[#1a1a2e] border border-green-500/30 rounded-xl p-4 shadow-2xl max-w-xs notification-slide">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+       <svg class="w-6 h-6 text-green-500" fill="currentColor" viewbox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+       </svg>
+      </div>
+      <div>
+       <p class="text-green-400 font-semibold text-sm" id="notification-name">Someone from Kathmandu</p>
+       <p class="text-gray-400 text-xs">just purchased this product!</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Hero Section -->
+   <section class="min-h-screen py-12 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center"><!-- Left - Product Images -->
+     <div class="relative" style="animation: slide-in-left 0.8s ease-out">
+      <div class="relative">
+       <div class="absolute inset-0 gradient-bg opacity-20 blur-3xl rounded-full"></div>
+       <div id="product-carousel" class="relative z-10">
+        <div class="gradient-border rounded-2xl p-1 float-animation">
+         <div class="bg-[#1a1a2e] rounded-2xl p-8">
+          <svg class="w-full h-64 md:h-80" viewbox="0 0 400 300"><defs>
+            <lineargradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+             <stop offset="0%" style="stop-color:#FFD700" />
+             <stop offset="100%" style="stop-color:#22C55E" />
+            </lineargradient>
+           </defs> <rect x="80" y="30" width="240" height="240" rx="10" fill="url(#bookGrad)" opacity="0.9" /> <rect x="90" y="40" width="220" height="220" rx="8" fill="#1a1a2e" /> <text x="200" y="120" text-anchor="middle" fill="url(#bookGrad)" font-size="24" font-weight="bold">
+            PREMIUM
+           </text> <text x="200" y="155" text-anchor="middle" fill="white" font-size="18" font-weight="600">
+            Digital Course
+           </text> <text x="200" y="190" text-anchor="middle" fill="#888" font-size="14">
+            Master Your Skills
+           </text> <rect x="140" y="210" width="120" height="30" rx="15" fill="url(#bookGrad)" /> <text x="200" y="230" text-anchor="middle" fill="#000" font-size="12" font-weight="bold">
+            2024 EDITION
+           </text>
+          </svg>
+         </div>
+        </div>
+       </div>
+      </div><!-- Carousel Dots -->
+      <div class="flex justify-center gap-2 mt-6">
+       <div class="w-3 h-3 rounded-full gradient-bg"></div>
+       <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+       <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+      </div>
+     </div><!-- Right - Product Info -->
+     <div style="animation: slide-in-right 0.8s ease-out">
+      <div class="space-y-6"><!-- Badges -->
+       <div class="flex flex-wrap gap-2"><span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">✓ Verified</span> <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs font-semibold">⚡ Bestseller</span> <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold">🔒 Instant Access</span>
+       </div><!-- Title -->
+       <h1 id="hero-title" class="text-4xl md:text-5xl font-black leading-tight">Master <span class="gradient-text">Digital Skills</span> &amp; Transform Your Career</h1><!-- Rating -->
+       <div class="flex items-center gap-4">
+        <div class="flex items-center gap-1"><span class="text-yellow-400 text-xl">★★★★★</span> <span class="text-gray-400 ml-2">(4.9/5)</span>
+        </div><span class="text-gray-500">|</span> <span class="text-green-400 font-semibold">1,200+ Students Enrolled</span>
+       </div><!-- Summary -->
+       <p id="hero-summary" class="text-gray-300 text-lg leading-relaxed">The ultimate comprehensive course designed to take you from beginner to expert. Learn industry secrets, practical techniques, and proven strategies that top professionals use.</p>
+       <div id="expanded-summary" class="hidden text-gray-400 leading-relaxed">
+        <p>This course includes 12 detailed chapters covering everything you need to know. From fundamentals to advanced techniques, you'll gain hands-on experience with real-world projects. Our proven methodology has helped thousands of students achieve their goals and land their dream opportunities.</p>
+       </div><button id="read-more-btn" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm">Read More ▼</button> <!-- Trust Badges -->
+       <div class="flex flex-wrap gap-4 py-4 border-y border-gray-800">
+        <div class="flex items-center gap-2">
+         <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewbox="0 0 20 20">
+           <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+         </div><span class="text-sm text-gray-300">100% Safe Payment</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20">
+           <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+          </svg>
+         </div><span class="text-sm text-gray-300">Lifetime Access</span>
+        </div>
+        <div class="flex items-center gap-2">
+         <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewbox="0 0 20 20">
+           <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+          </svg>
+         </div><span class="text-sm text-gray-300">7-Day Refund</span>
+        </div>
+       </div><!-- Pricing & CTA -->
+       <div class="bg-[#1a1a2e] rounded-2xl p-6 space-y-4">
+        <div class="flex items-center gap-4"><span class="text-gray-500 line-through text-2xl">NPR <span id="hero-original-price">499</span></span> <span class="gradient-text text-4xl font-black">NPR <span id="hero-sale-price">299</span></span> <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">40% OFF</span>
+        </div>
+        <div class="flex items-center gap-4 text-sm"><span class="text-red-400 font-semibold">⏰ Offer ends in:</span>
+         <div class="flex gap-2"><span class="bg-black/50 px-3 py-1 rounded" id="hero-hours">02</span>: <span class="bg-black/50 px-3 py-1 rounded" id="hero-minutes">45</span>: <span class="bg-black/50 px-3 py-1 rounded" id="hero-seconds">30</span>
+         </div>
+        </div>
+        <p class="text-orange-400 font-semibold animate-pulse">🔥 Only <span id="hero-copies">20</span> copies remaining at this price!</p><button id="hero-buy-btn" class="w-full gradient-bg text-black font-bold text-xl py-4 rounded-xl glow-button hover:scale-105 transition-transform"> 🛒 Buy Now - Instant Access </button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- About / Chapters Section -->
+   <section class="py-16 px-4 md:px-8 bg-[#0f0f0f]">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-black mb-4">What You'll <span class="gradient-text">Learn</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">12 comprehensive chapters designed to transform your skills from beginner to expert level</p>
+     </div>
+     <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6"><!-- Chapter Cards -->
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="1">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">01</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Foundation Basics</h3>
+        <p class="text-gray-400 text-sm mb-4">Master the fundamental concepts and build a solid foundation</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="1">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="2">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">02</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Core Techniques</h3>
+        <p class="text-gray-400 text-sm mb-4">Learn essential techniques used by industry professionals</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="2">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="3">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">03</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Advanced Strategies</h3>
+        <p class="text-gray-400 text-sm mb-4">Discover advanced methods to accelerate your progress</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="3">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="4">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">04</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Practical Projects</h3>
+        <p class="text-gray-400 text-sm mb-4">Apply your knowledge with hands-on real-world projects</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="4">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="5">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">05</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Industry Secrets</h3>
+        <p class="text-gray-400 text-sm mb-4">Unlock insider knowledge and professional tips</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="5">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="6">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">06</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Tools &amp; Resources</h3>
+        <p class="text-gray-400 text-sm mb-4">Get access to premium tools and exclusive resources</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="6">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="7">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">07</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Case Studies</h3>
+        <p class="text-gray-400 text-sm mb-4">Learn from real success stories and case analyses</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="7">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="8">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">08</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Optimization Tips</h3>
+        <p class="text-gray-400 text-sm mb-4">Maximize results with proven optimization methods</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="8">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="9">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">09</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Automation Guide</h3>
+        <p class="text-gray-400 text-sm mb-4">Automate tasks and scale your workflow efficiently</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="9">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="10">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">10</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Growth Hacking</h3>
+        <p class="text-gray-400 text-sm mb-4">Accelerate growth with creative strategies</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="10">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="11">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">11</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Monetization</h3>
+        <p class="text-gray-400 text-sm mb-4">Turn your skills into sustainable income streams</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="11">Learn More →</button>
+       </div>
+      </div>
+      <div class="gradient-border rounded-xl p-1 card-hover scroll-reveal" data-chapter="12">
+       <div class="bg-[#1a1a2e] rounded-xl p-6 h-full">
+        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4"><span class="text-black font-bold text-xl">12</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Future Trends</h3>
+        <p class="text-gray-400 text-sm mb-4">Stay ahead with emerging trends and opportunities</p><button class="chapter-btn text-yellow-400 hover:text-yellow-300 font-semibold text-sm" data-chapter="12">Learn More →</button>
+       </div>
+      </div>
+     </div><!-- Why Buy Section -->
+     <div class="mt-16 scroll-reveal">
+      <div class="gradient-border rounded-2xl p-1">
+       <div class="bg-[#1a1a2e] rounded-2xl p-8 md:p-12">
+        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">Why Choose <span class="gradient-text">This Course?</span></h3>
+        <div class="grid md:grid-cols-2 gap-8">
+         <div class="space-y-4">
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Lifetime access to all content and future updates</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Step-by-step guidance from industry experts</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Real-world projects and practical exercises</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Certificate of completion upon finishing</p>
+          </div>
+         </div>
+         <div class="space-y-4">
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">24/7 WhatsApp support for your questions</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Exclusive community access with other students</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">7-day money-back guarantee - no questions asked</p>
+          </div>
+          <div class="flex items-start gap-3"><span class="text-green-400 text-xl">✓</span>
+           <p class="text-gray-300">Bonus resources worth NPR 2,000+</p>
+          </div>
+         </div>
+        </div>
+        <div class="text-center mt-8"><button class="buy-now-btn gradient-bg text-black font-bold text-lg px-12 py-4 rounded-xl glow-button hover:scale-105 transition-transform"> Get Instant Access Now → </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Reviews Section -->
+   <section class="py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-black mb-4"><span class="gradient-text">1,200+</span> Happy Students</h2>
+      <p class="text-gray-400">See what our students have achieved after completing this course</p>
+     </div><!-- WhatsApp Screenshots Carousel -->
+     <div class="scroll-reveal">
+      <h3 class="text-xl font-bold mb-6 text-center">Real Student Feedback 💬</h3>
+      <div id="chat-carousel" class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"><!-- Chat Screenshot 1 -->
+       <div class="min-w-[300px] md:min-w-[350px] snap-center">
+        <div class="bg-[#075e54] rounded-xl p-4">
+         <div class="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+          <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-lg">
+           👤
+          </div>
+          <div>
+           <p class="font-semibold text-white">Raj Sharma</p>
+           <p class="text-xs text-green-200">Online</p>
+          </div>
+         </div>
+         <div class="space-y-2">
+          <div class="bg-[#dcf8c6] text-black p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
+           <p class="text-sm">This course completely changed my career! Got a 50% salary hike 🎉</p>
+           <p class="text-xs text-gray-500 text-right mt-1">10:30 AM ✓✓</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Chat Screenshot 2 -->
+       <div class="min-w-[300px] md:min-w-[350px] snap-center">
+        <div class="bg-[#075e54] rounded-xl p-4">
+         <div class="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+          <div class="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-lg">
+           👩
+          </div>
+          <div>
+           <p class="font-semibold text-white">Priya Thapa</p>
+           <p class="text-xs text-green-200">Online</p>
+          </div>
+         </div>
+         <div class="space-y-2">
+          <div class="bg-[#dcf8c6] text-black p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
+           <p class="text-sm">Best investment I've ever made! Started freelancing and earning 40k/month 💰</p>
+           <p class="text-xs text-gray-500 text-right mt-1">2:45 PM ✓✓</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Chat Screenshot 3 -->
+       <div class="min-w-[300px] md:min-w-[350px] snap-center">
+        <div class="bg-[#075e54] rounded-xl p-4">
+         <div class="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+          <div class="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center text-lg">
+           👨
+          </div>
+          <div>
+           <p class="font-semibold text-white">Anil Kumar</p>
+           <p class="text-xs text-green-200">Online</p>
+          </div>
+         </div>
+         <div class="space-y-2">
+          <div class="bg-[#dcf8c6] text-black p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
+           <p class="text-sm">From complete beginner to confident professional in just 2 weeks! Thank you so much 🙏</p>
+           <p class="text-xs text-gray-500 text-right mt-1">5:20 PM ✓✓</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Chat Screenshot 4 -->
+       <div class="min-w-[300px] md:min-w-[350px] snap-center">
+        <div class="bg-[#075e54] rounded-xl p-4">
+         <div class="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+          <div class="w-10 h-10 rounded-full bg-yellow-200 flex items-center justify-center text-lg">
+           👩‍💼
+          </div>
+          <div>
+           <p class="font-semibold text-white">Sita Gurung</p>
+           <p class="text-xs text-green-200">Online</p>
+          </div>
+         </div>
+         <div class="space-y-2">
+          <div class="bg-[#dcf8c6] text-black p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
+           <p class="text-sm">Already got 3 clients in my first month! This course is gold ⭐</p>
+           <p class="text-xs text-gray-500 text-right mt-1">11:15 AM ✓✓</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Trust Message -->
+     <div class="text-center mt-12 scroll-reveal">
+      <div class="inline-block bg-[#1a1a2e] rounded-2xl p-6 md:p-8">
+       <p class="text-xl md:text-2xl font-semibold text-gray-300">"This course is specifically designed to help <span class="gradient-text">YOU</span> achieve your goals"</p>
+       <p class="text-gray-500 mt-2">Join 1,200+ successful students today</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimonials & FAQ Section -->
+   <section class="py-16 px-4 md:px-8 bg-[#0f0f0f]">
+    <div class="max-w-7xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-12"><!-- Testimonials -->
+      <div class="scroll-reveal">
+       <h3 class="text-2xl font-bold mb-6">Student <span class="gradient-text">Reviews</span></h3>
+       <div class="space-y-4">
+        <div class="testimonial-card rounded-xl p-6 card-hover">
+         <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-black font-bold">
+           RS
+          </div>
+          <div>
+           <p class="font-semibold">Ramesh Shrestha</p>
+           <div class="text-yellow-400 text-sm">
+            ★★★★★
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-300">"The best online course I've ever taken. Clear explanations, practical examples, and amazing support. Highly recommended!"</p>
+        </div>
+        <div class="testimonial-card rounded-xl p-6 card-hover">
+         <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-black font-bold">
+           SM
+          </div>
+          <div>
+           <p class="font-semibold">Sunita Maharjan</p>
+           <div class="text-yellow-400 text-sm">
+            ★★★★★
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-300">"Worth every rupee! I learned more in 2 weeks than in months of self-study. The practical projects really helped solidify my learning."</p>
+        </div>
+        <div class="testimonial-card rounded-xl p-6 card-hover">
+         <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-black font-bold">
+           BK
+          </div>
+          <div>
+           <p class="font-semibold">Bikash Karki</p>
+           <div class="text-yellow-400 text-sm">
+            ★★★★★
+           </div>
+          </div>
+         </div>
+         <p class="text-gray-300">"I was skeptical at first, but this course exceeded all my expectations. The WhatsApp support is incredibly responsive!"</p>
+        </div>
+       </div>
+      </div><!-- FAQ -->
+      <div class="scroll-reveal">
+       <h3 class="text-2xl font-bold mb-6">Frequently Asked <span class="gradient-text">Questions</span></h3>
+       <div class="space-y-4">
+        <div class="faq-item gradient-border rounded-xl p-1">
+         <div class="bg-[#1a1a2e] rounded-xl"><button class="faq-btn w-full p-4 text-left flex items-center justify-between font-semibold"> <span>How do I access the course after purchase?</span> <span class="text-yellow-400">+</span> </button>
+          <div class="faq-answer hidden px-4 pb-4 text-gray-400">
+           After purchase, you'll receive instant access via WhatsApp and email. All materials will be available immediately for download and viewing.
+          </div>
+         </div>
+        </div>
+        <div class="faq-item gradient-border rounded-xl p-1">
+         <div class="bg-[#1a1a2e] rounded-xl"><button class="faq-btn w-full p-4 text-left flex items-center justify-between font-semibold"> <span>Is there a refund policy?</span> <span class="text-yellow-400">+</span> </button>
+          <div class="faq-answer hidden px-4 pb-4 text-gray-400">
+           Yes! We offer a 7-day money-back guarantee. If you're not satisfied with the course, simply contact us and we'll process your refund - no questions asked.
+          </div>
+         </div>
+        </div>
+        <div class="faq-item gradient-border rounded-xl p-1">
+         <div class="bg-[#1a1a2e] rounded-xl"><button class="faq-btn w-full p-4 text-left flex items-center justify-between font-semibold"> <span>Do I need any prior experience?</span> <span class="text-yellow-400">+</span> </button>
+          <div class="faq-answer hidden px-4 pb-4 text-gray-400">
+           Not at all! This course is designed for complete beginners. We start from the basics and gradually progress to advanced topics. Anyone can learn!
+          </div>
+         </div>
+        </div>
+        <div class="faq-item gradient-border rounded-xl p-1">
+         <div class="bg-[#1a1a2e] rounded-xl"><button class="faq-btn w-full p-4 text-left flex items-center justify-between font-semibold"> <span>How long do I have access to the course?</span> <span class="text-yellow-400">+</span> </button>
+          <div class="faq-answer hidden px-4 pb-4 text-gray-400">
+           You get lifetime access! Once you purchase, you can access all materials forever, including any future updates we add to the course.
+          </div>
+         </div>
+        </div>
+        <div class="faq-item gradient-border rounded-xl p-1">
+         <div class="bg-[#1a1a2e] rounded-xl"><button class="faq-btn w-full p-4 text-left flex items-center justify-between font-semibold"> <span>What payment methods do you accept?</span> <span class="text-yellow-400">+</span> </button>
+          <div class="faq-answer hidden px-4 pb-4 text-gray-400">
+           We accept eSewa, Khalti, Bank Transfer, and other popular payment methods in Nepal. Payment is 100% secure and encrypted.
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Bonus Section -->
+   <section class="py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12 scroll-reveal">
+      <div class="inline-block bg-red-500/20 text-red-400 px-6 py-2 rounded-full font-bold mb-4 animate-pulse">
+       ⏰ Buy Within 30 Minutes To Get These Bonuses FREE!
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black mb-4">Exclusive <span class="gradient-text">Bonuses</span></h2>
+      <p class="text-gray-400">Get these premium resources worth NPR 2,000+ absolutely FREE</p>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"><!-- Bonus Items -->
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">E-Book Guide</h4>
+       <p class="text-gray-500 text-xs mb-2">Complete PDF guide</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 199</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Templates Pack</h4>
+       <p class="text-gray-500 text-xs mb-2">50+ premium templates</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 299</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Video Tutorials</h4>
+       <p class="text-gray-500 text-xs mb-2">10+ bonus videos</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 399</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Cheat Sheets</h4>
+       <p class="text-gray-500 text-xs mb-2">Quick reference cards</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 99</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Community Access</h4>
+       <p class="text-gray-500 text-xs mb-2">Private group access</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 199</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Q&amp;A Sessions</h4>
+       <p class="text-gray-500 text-xs mb-2">Weekly live sessions</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 299</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z" clip-rule="evenodd" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Resource Files</h4>
+       <p class="text-gray-500 text-xs mb-2">All project files</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 149</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+      <div class="bonus-card rounded-xl p-4 card-hover scroll-reveal">
+       <div class="gradient-bg rounded-lg p-4 mb-3">
+        <svg class="w-10 h-10 mx-auto text-black" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z" />
+        </svg>
+       </div>
+       <h4 class="font-semibold text-sm mb-1">Certificate</h4>
+       <p class="text-gray-500 text-xs mb-2">Completion certificate</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through text-xs">NPR 199</span> <span class="text-green-400 font-bold text-sm">FREE</span>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-8">
+      <p class="text-gray-400 mb-4">Total Bonus Value: <span class="line-through">NPR 2,000+</span> → <span class="gradient-text font-bold">FREE</span></p>
+     </div>
+    </div>
+   </section><!-- Final Urgency Section -->
+   <section class="py-16 px-4 md:px-8 bg-[#0f0f0f]">
+    <div class="max-w-4xl mx-auto text-center scroll-reveal">
+     <div class="gradient-border rounded-2xl p-1">
+      <div class="bg-[#1a1a2e] rounded-2xl p-8 md:p-12">
+       <div class="inline-block bg-red-500/20 text-red-400 px-6 py-2 rounded-full font-bold mb-6 animate-pulse">
+        ⚠️ Last Chance - Don't Miss Out!
+       </div>
+       <h2 class="text-3xl md:text-4xl font-black mb-6">Get Instant Access <span class="gradient-text">Now</span></h2>
+       <div class="flex flex-wrap justify-center gap-4 mb-6">
+        <div class="bg-black/30 rounded-xl p-4 text-center">
+         <p class="text-3xl font-black" id="final-hours">02</p>
+         <p class="text-gray-500 text-sm">Hours</p>
+        </div>
+        <div class="bg-black/30 rounded-xl p-4 text-center">
+         <p class="text-3xl font-black" id="final-minutes">45</p>
+         <p class="text-gray-500 text-sm">Minutes</p>
+        </div>
+        <div class="bg-black/30 rounded-xl p-4 text-center">
+         <p class="text-3xl font-black" id="final-seconds">30</p>
+         <p class="text-gray-500 text-sm">Seconds</p>
+        </div>
+       </div>
+       <p class="text-xl text-orange-400 font-bold mb-6 animate-pulse">🔥 Only <span id="final-copies">20</span> copies left at this price!</p>
+       <div class="flex flex-col items-center gap-4 mb-8">
+        <div class="flex items-center gap-4"><span class="text-gray-500 line-through text-2xl">NPR <span id="final-original-price">499</span></span> <span class="gradient-text text-5xl font-black">NPR <span id="final-sale-price">299</span></span>
+        </div><span class="bg-green-500/20 text-green-400 px-4 py-2 rounded-full font-bold">Save 40% Today!</span>
+       </div><button class="buy-now-btn gradient-bg text-black font-black text-xl px-16 py-5 rounded-xl glow-button hover:scale-105 transition-transform w-full md:w-auto"> 🛒 Buy Now - Get Instant Access </button>
+       <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm text-gray-400"><span>✓ Instant Access</span> <span>✓ Lifetime Updates</span> <span>✓ 7-Day Refund</span> <span>✓ 24/7 Support</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-12 px-4 md:px-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto">
+     <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+       <h4 class="font-bold text-lg mb-4 gradient-text">About Us</h4>
+       <p class="text-gray-400 text-sm">We are dedicated to providing high-quality digital education to help you achieve your career goals and transform your life.</p>
+      </div>
+      <div>
+       <h4 class="font-bold text-lg mb-4 gradient-text">Quick Links</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-yellow-400 transition-colors">Terms &amp; Conditions</a></li>
+        <li><a href="#" class="hover:text-yellow-400 transition-colors">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-yellow-400 transition-colors">Refund Policy</a></li>
+        <li><a href="#" class="hover:text-yellow-400 transition-colors">Contact Us</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold text-lg mb-4 gradient-text">Payment Methods</h4>
+       <div class="flex flex-wrap gap-3">
+        <div class="bg-white/10 rounded-lg px-4 py-2 text-sm">
+         eSewa
+        </div>
+        <div class="bg-white/10 rounded-lg px-4 py-2 text-sm">
+         Khalti
+        </div>
+        <div class="bg-white/10 rounded-lg px-4 py-2 text-sm">
+         Bank Transfer
+        </div>
+        <div class="bg-white/10 rounded-lg px-4 py-2 text-sm">
+         IME Pay
+        </div>
+       </div>
+       <div class="mt-4 flex items-center gap-2 text-green-400 text-sm">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg> 100% Secure Payment
+       </div>
+      </div>
+     </div>
+     <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+      <p>© 2024 Premium Digital Products. All Rights Reserved.</p>
+      <p class="mt-2">Made with ❤️ in Nepal</p>
+     </div>
+    </div>
+   </footer><!-- Sticky Bottom Bar -->
+   <div class="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-gray-800 p-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+     <div class="flex items-center gap-4">
+      <div>
+       <p class="text-sm text-orange-400 font-semibold animate-pulse">⚡ Only <span id="sticky-copies">20</span> copies left!</p>
+       <div class="flex items-center gap-2"><span class="text-gray-500 line-through">NPR <span id="sticky-original-price">499</span></span> <span class="gradient-text font-bold text-xl">NPR <span id="sticky-sale-price">299</span></span>
+       </div>
+      </div>
+      <div class="hidden md:flex items-center gap-1 bg-black/50 rounded-lg px-3 py-1"><span class="text-white text-sm" id="sticky-hours">02</span>:<span class="text-white text-sm" id="sticky-minutes">45</span>:<span class="text-white text-sm" id="sticky-seconds">30</span>
+      </div>
+     </div><button class="buy-now-btn gradient-bg text-black font-bold px-8 py-3 rounded-xl glow-button hover:scale-105 transition-transform"> Buy Now → </button>
+    </div>
+   </div><!-- WhatsApp Button --> <a id="whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="fixed right-4 bottom-24 z-40 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-xl whatsapp-btn hover:scale-110 transition-transform">
+    <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24">
+     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></a> <!-- Chapter Modal -->
+   <div id="chapter-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 chapter-modal bg-black/80">
+    <div class="bg-[#1a1a2e] rounded-2xl max-w-lg w-full max-h-[80%] overflow-auto gradient-border p-1">
+     <div class="bg-[#1a1a2e] rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+       <h3 id="modal-title" class="text-xl font-bold gradient-text">Chapter Title</h3><button id="close-modal" class="text-gray-400 hover:text-white text-2xl">×</button>
+      </div>
+      <div id="modal-content" class="text-gray-300 space-y-4"><!-- Content will be injected -->
+      </div><button class="buy-now-btn w-full gradient-bg text-black font-bold py-3 rounded-xl mt-6 hover:scale-105 transition-transform"> Get Full Access → </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default Configuration
+    const defaultConfig = {
+      product_title: 'Master Digital Skills & Transform Your Career',
+      product_tagline: 'The ultimate comprehensive course',
+      original_price: '499',
+      sale_price: '299',
+      whatsapp_number: '+9779800000000',
+      background_color: '#0a0a0a',
+      surface_color: '#1a1a2e',
+      text_color: '#ffffff',
+      primary_color: '#FFD700',
+      secondary_color: '#22C55E'
+    };
+
+    // State
+    let copiesLeft = 20;
+    let countdownTime = 2 * 60 * 60 + 45 * 60 + 30; // 2h 45m 30s in seconds
+    let notificationIndex = 0;
+    let notificationTimeouts = [30000, 60000, 120000];
+
+    // Fake names for notifications
+    const fakeNames = [
+      'Someone from Kathmandu', 'A student from Pokhara', 'Someone from Lalitpur',
+      'A buyer from Bhaktapur', 'Someone from Chitwan', 'A learner from Butwal',
+      'Someone from Biratnagar', 'A student from Dharan', 'Someone from Hetauda',
+      'A buyer from Birgunj', 'Someone from Nepalgunj', 'A learner from Dhangadi',
+      'Someone from Janakpur', 'A student from Bharatpur', 'Someone from Itahari',
+      'A buyer from Damak', 'Someone from Tulsipur', 'A learner from Ghorahi',
+      'Someone from Siddharthanagar', 'A student from Lahan'
+    ];
+
+    // Chapter data
+    const chapters = {
+      1: { title: 'Foundation Basics', content: 'In this chapter, you will learn the fundamental concepts that form the backbone of all advanced techniques. We cover terminology, basic principles, and essential theory that every professional needs to know.' },
+      2: { title: 'Core Techniques', content: 'Master the essential techniques used by industry professionals. This chapter includes step-by-step tutorials on core methodologies, best practices, and proven approaches that deliver results.' },
+      3: { title: 'Advanced Strategies', content: 'Take your skills to the next level with advanced strategies. Learn sophisticated methods, complex problem-solving approaches, and expert-level techniques that set professionals apart.' },
+      4: { title: 'Practical Projects', content: 'Apply everything you\'ve learned through hands-on projects. Work on real-world scenarios that mirror actual industry challenges and build a portfolio you can showcase.' },
+      5: { title: 'Industry Secrets', content: 'Discover insider knowledge that isn\'t taught anywhere else. Learn the shortcuts, hacks, and secret techniques that top performers use to get ahead.' },
+      6: { title: 'Tools & Resources', content: 'Get access to premium tools, software recommendations, and exclusive resources. Learn which tools the pros use and how to maximize your productivity.' },
+      7: { title: 'Case Studies', content: 'Analyze real success stories and learn from actual implementations. Understand what worked, what didn\'t, and how to apply these lessons to your own journey.' },
+      8: { title: 'Optimization Tips', content: 'Learn how to optimize your workflow, maximize efficiency, and achieve better results in less time. Includes time management and productivity techniques.' },
+      9: { title: 'Automation Guide', content: 'Discover how to automate repetitive tasks and scale your efforts. Learn about automation tools, workflows, and systems that multiply your output.' },
+      10: { title: 'Growth Hacking', content: 'Master creative, low-cost strategies for rapid growth. Learn unconventional techniques that can accelerate your progress exponentially.' },
+      11: { title: 'Monetization', content: 'Transform your skills into income streams. Learn various monetization models, pricing strategies, and how to build a sustainable career or business.' },
+      12: { title: 'Future Trends', content: 'Stay ahead of the curve by understanding emerging trends and future opportunities. Prepare yourself for what\'s coming and position yourself for success.' }
+    };
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          updateUI(config);
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['product_title', config.product_title || defaultConfig.product_title],
+          ['product_tagline', config.product_tagline || defaultConfig.product_tagline],
+          ['original_price', config.original_price || defaultConfig.original_price],
+          ['sale_price', config.sale_price || defaultConfig.sale_price],
+          ['whatsapp_number', config.whatsapp_number || defaultConfig.whatsapp_number]
+        ])
+      });
+    }
+
+    function updateUI(config) {
+      const c = { ...defaultConfig, ...config };
+      
+      // Update prices
+      document.querySelectorAll('#top-original-price, #hero-original-price, #sticky-original-price, #final-original-price').forEach(el => el.textContent = c.original_price);
+      document.querySelectorAll('#top-sale-price, #hero-sale-price, #sticky-sale-price, #final-sale-price').forEach(el => el.textContent = c.sale_price);
+      
+      // Update WhatsApp link
+      const waBtn = document.getElementById('whatsapp-btn');
+      if (waBtn) waBtn.href = `https://wa.me/${c.whatsapp_number.replace(/[^0-9]/g, '')}`;
+    }
+
+    // Countdown Timer
+    function updateCountdown() {
+      if (countdownTime <= 0) return;
+      countdownTime--;
+      
+      const hours = Math.floor(countdownTime / 3600);
+      const minutes = Math.floor((countdownTime % 3600) / 60);
+      const seconds = countdownTime % 60;
+      
+      const h = String(hours).padStart(2, '0');
+      const m = String(minutes).padStart(2, '0');
+      const s = String(seconds).padStart(2, '0');
+      
+      document.querySelectorAll('#countdown-hours, #hero-hours, #sticky-hours, #final-hours').forEach(el => el.textContent = h);
+      document.querySelectorAll('#countdown-minutes, #hero-minutes, #sticky-minutes, #final-minutes').forEach(el => el.textContent = m);
+      document.querySelectorAll('#countdown-seconds, #hero-seconds, #sticky-seconds, #final-seconds').forEach(el => el.textContent = s);
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    // Update copies count
+    function updateCopies() {
+      document.querySelectorAll('#copies-left, #hero-copies, #sticky-copies, #final-copies').forEach(el => el.textContent = copiesLeft);
+    }
+
+    // Notification System
+    function showNotification() {
+      if (notificationIndex >= 20) return;
+      
+      const popup = document.getElementById('notification-popup');
+      const nameEl = document.getElementById('notification-name');
+      
+      nameEl.textContent = fakeNames[notificationIndex];
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+      
+      // Decrease copies
+      if (copiesLeft > 5) {
+        copiesLeft--;
+        updateCopies();
+      }
+      
+      setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('flex');
+        
+        notificationIndex++;
+        if (notificationIndex < 20) {
+          const nextDelay = notificationTimeouts[Math.min(notificationIndex, notificationTimeouts.length - 1)] * (1 + notificationIndex * 0.5);
+          setTimeout(showNotification, nextDelay);
+        }
+      }, 4000);
+    }
+
+    // Start notifications after 30 seconds
+    setTimeout(showNotification, 30000);
+
+    // Read More Toggle
+    document.getElementById('read-more-btn').addEventListener('click', function() {
+      const expanded = document.getElementById('expanded-summary');
+      if (expanded.classList.contains('hidden')) {
+        expanded.classList.remove('hidden');
+        this.textContent = 'Read Less ▲';
+      } else {
+        expanded.classList.add('hidden');
+        this.textContent = 'Read More ▼';
+      }
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('span:last-child');
+        
+        if (answer.classList.contains('hidden')) {
+          answer.classList.remove('hidden');
+          icon.textContent = '−';
+        } else {
+          answer.classList.add('hidden');
+          icon.textContent = '+';
+        }
+      });
+    });
+
+    // Chapter Modal
+    const modal = document.getElementById('chapter-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+
+    document.querySelectorAll('.chapter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const chapterId = this.dataset.chapter;
+        const chapter = chapters[chapterId];
+        
+        modalTitle.textContent = `Chapter ${chapterId}: ${chapter.title}`;
+        modalContent.innerHTML = `
+          <p>${chapter.content}</p>
+          <div class="mt-4 p-4 bg-black/30 rounded-lg">
+            <h4 class="font-semibold mb-2 text-yellow-400">What you'll learn:</h4>
+            <ul class="space-y-2 text-sm">
+              <li>✓ Comprehensive theory and concepts</li>
+              <li>✓ Practical exercises and examples</li>
+              <li>✓ Real-world application techniques</li>
+              <li>✓ Expert tips and best practices</li>
+            </ul>
+          </div>
+        `;
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      });
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+    // Buy Now button click handler
+    document.querySelectorAll('.buy-now-btn, #hero-buy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+        const whatsappNumber = (config.whatsapp_number || defaultConfig.whatsapp_number).replace(/[^0-9]/g, '');
+        const message = encodeURIComponent(`Hi! I want to purchase the Premium Digital Course for NPR ${config.sale_price || defaultConfig.sale_price}`);
+        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      });
+    });
+
+    // Initialize UI
+    updateUI(defaultConfig);
+    updateCopies();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d6f6c6774e89e7a',t:'MTc3MjYxMjAyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
